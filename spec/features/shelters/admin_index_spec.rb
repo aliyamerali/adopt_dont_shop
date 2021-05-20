@@ -22,8 +22,11 @@ RSpec.describe 'the admin shelters index' do
   end
 
   it 'links to each shelter admin show page' do
-    expect(page).to have_link("/admin/shelters/#{@shelter_1.id}")
-    expect(page).to have_link("/admin/shelters/#{@shelter_2.id}")
-    expect(page).to have_link("/admin/shelters/#{@shelter_3.id}")
+    expect(page).to have_link(@shelter_1.name, href: "/admin/shelters/#{@shelter_1.id}")
+    expect(page).to have_link(@shelter_2.name, href: "/admin/shelters/#{@shelter_2.id}")
+    expect(page).to have_link(@shelter_3.name, href: "/admin/shelters/#{@shelter_3.id}")
+
+    click_link(@shelter_1.name)
+    expect(page).to have_current_path("/admin/shelters/#{@shelter_1.id}")
   end
 end
