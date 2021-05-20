@@ -8,16 +8,22 @@ RSpec.describe 'the admin shelters index' do
     @shelter_1.pets.create(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: true)
     @shelter_1.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
     @shelter_3.pets.create(name: 'Lucille Bald', breed: 'sphynx', age: 8, adoptable: true)
+
+    visit '/admin/shelters'
   end
 
   it 'lists all shelters in the system in reverse alphabetical order by name' do
-    visit '/admin/shelters'
-
     expect(page).to have_content(@shelter_1.name)
     expect(page).to have_content(@shelter_2.name)
     expect(page).to have_content(@shelter_3.name)
 
     expect(@shelter_2.name).to appear_before(@shelter_3.name)
     expect(@shelter_3.name).to appear_before(@shelter_1.name)
+  end
+
+  it 'links to each shelter admin show page' do
+    expect(page).to have_link("/admin/shelters/#{@shelter_1.id}")
+    expect(page).to have_link("/admin/shelters/#{@shelter_2.id}")
+    expect(page).to have_link("/admin/shelters/#{@shelter_3.id}")
   end
 end
