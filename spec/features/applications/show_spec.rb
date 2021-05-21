@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Application show page", type: :feature do
   before :each do
+    @shelter = Shelter.create!(name: "Denver Animal Rescue", city: "Denver", rank: 1, foster_program: true)
     @application = Application.create!(name: "Aliya",
                                       street_address: "1243 N Lafayette",
                                       city: "Denver",
@@ -13,17 +14,17 @@ RSpec.describe "Application show page", type: :feature do
                             age: 3,
                             breed: "rescue special",
                             name: "Alfalfa",
-                            shelter_id: 123)
+                            shelter_id: @shelter.id)
     @sprout = Pet.create!(adoptable: true,
                             age: 5,
                             breed: "lab mix",
                             name: "Sprout",
-                            shelter_id: 123)
+                            shelter_id: @shelter.id)
 
     ApplicationsPet.create!(pet: @alfalfa, application: @application)
     ApplicationsPet.create!(pet: @sprout, application: @application)
 
-    visit "/applications/#{application.id}"
+    visit "/applications/#{@application.id}"
   end
 
   it 'shows the application attributes' do
