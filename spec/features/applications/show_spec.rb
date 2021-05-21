@@ -38,7 +38,9 @@ RSpec.describe "Application show page", type: :feature do
 
   it 'shows the names of all associated pets, linking to pet show pages' do
     expect(page).to have_content(@alfalfa.name)
+    expect(page).to have_link(@alfalfa.name, href: "/pets/#{@alfalfa.id}")
     expect(page).to have_content(@sprout.name)
+    expect(page).to have_link(@sprout.name, href: "/pets/#{@sprout.id}")
   end
 
   it 'shows the application status' do
