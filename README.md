@@ -1,7 +1,7 @@
 # Adopt, don't Shop
 
 ### Updated database design with Applications
-[Adopt Don't Shop Schema - ERD with colored entities (UML notation).pdf](https://github.com/aliyamerali/adopt_dont_shop/files/6525243/Adopt.Don.t.Shop.Schema.-.ERD.with.colored.entities.UML.notation.pdf)
+![Adopt Don't Shop Schema - ERD with colored entities (UML notation)](https://user-images.githubusercontent.com/5446926/119202085-5b2f3280-ba4d-11eb-882f-09d32ac31ef2.jpeg)
 
 ### Existing database design
 ![visual-schema.png](https://i.postimg.cc/0ywZgQ1W/visual-schema.png)
