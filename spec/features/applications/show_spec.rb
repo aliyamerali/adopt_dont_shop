@@ -98,11 +98,15 @@ RSpec.describe "Application show page", type: :feature do
     fill_in :search, with: "Alfalfa"
     click_on "Search"
     click_on "Adopt this Pet"
+
+    expect(page).to have_field("Why would you be a good home for a new pet?")
+    fill_in :description, with: "I love dogs!"
     click_on "Submit Application"
 
     expect(page).to have_content("Status: Pending")
     expect(page).to have_content("This Application's Pets:")
     expect(page).to have_content(@alfalfa.name)
+    expect(page).to have_content("Testimonial: I love dogs!")
     expect(page).to have_link(@alfalfa.name, href: "/pets/#{@alfalfa.id}")
     expect(page).to_not have_content("Add a Pet to this Application")
   end
