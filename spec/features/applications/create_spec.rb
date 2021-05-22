@@ -44,6 +44,6 @@ RSpec.describe "create new application", type: :feature do
     click_on "Apply"
 
     expect(page).to have_current_path('/applications/new')
-    expect(page).to have_content("Error: State can't be blank, Zip-code is not a number, Testimonial is not a number")
+    expect(page).to have_content("Error: State can't be blank, Zip code can't be blank, Zip code is not a number, Description can't be blank")
   end
 end
