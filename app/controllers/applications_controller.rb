@@ -2,9 +2,8 @@ class ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
-
-    if params[:apply]
-      @application.update(status: "Pending")
+    if params[:commit] == "Submit Application"
+      @application.update(status: "Pending", description: params[:description])
       @application.save
     end
 
