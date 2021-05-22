@@ -98,6 +98,7 @@ RSpec.describe "Application show page", type: :feature do
     fill_in :search, with: "Alfalfa"
     click_on "Search"
     click_on "Adopt this Pet"
+    click_on "Submit Application"
 
     expect(page).to have_content("Status: Pending")
     expect(page).to have_content("This Application's Pets:")
