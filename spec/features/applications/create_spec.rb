@@ -33,4 +33,21 @@ RSpec.describe "create new application", type: :feature do
     expect(page).to have_content("In Progress")
     expect(page).to have_content("Doggos are the best!")
   end
+
+  it 'returns user to the new application page if all fields not completed' do
+    visit '/applications/new'
+
+    fill_in :name, with: 'Aliya Merali'
+    fill_in :street_address, with: '123 Maple St'
+    fill_in :city, with: 'Boulder'
+
+    click_on "Apply"
+
+    expect(page).to have_current_path('/applications/new')
+    expect(page).to have_content('You must complete all fields.')
+    expect(page).to have_content('Please add a valid state.')
+    expect(page).to have_content('Please add a valid zip-code.')
+    expect(page).to have_content('Please add a valid testimonial.')
+
+  end
 end
