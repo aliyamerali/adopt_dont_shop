@@ -110,4 +110,11 @@ RSpec.describe "Application show page", type: :feature do
     expect(page).to have_link(@alfalfa.name, href: "/pets/#{@alfalfa.id}")
     expect(page).to_not have_content("Add a Pet to this Application")
   end
+
+  it 'does not show the option to submit if no pets are added' do
+    visit "/applications/#{@application2.id}"
+
+    expect(page).to have_content("Status: In Progress")
+    expect(page).to_not have_button("Submit Application")
+  end
 end
