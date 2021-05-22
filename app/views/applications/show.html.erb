@@ -37,8 +37,8 @@
         </ul></td>
         <td> <%= button_to "Adopt this Pet", "/applications/#{@application.id}", params: {adopt: pet.id}, method: :get %></td>
       </tr>
+        <% end %>
     </table>
-    <% end %>
   <% end %>
 <% end %>
 

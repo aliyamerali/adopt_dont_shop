@@ -22,6 +22,11 @@ RSpec.describe "Application show page", type: :feature do
                             breed: "rescue special",
                             name: "Alfalfa",
                             shelter_id: @shelter.id)
+    @alf = Pet.create!(adoptable: true,
+                            age: 2,
+                            breed: "great dane",
+                            name: "Alf",
+                            shelter_id: @shelter.id)
     @sprout = Pet.create!(adoptable: true,
                             age: 5,
                             breed: "lab mix",
@@ -116,5 +121,36 @@ RSpec.describe "Application show page", type: :feature do
 
     expect(page).to have_content("Status: In Progress")
     expect(page).to_not have_button("Submit Application")
+  end
+
+  it 'returns partial matches on pet name searches' do
+    visit "/applications/#{@application2.id}"
+
+    fill_in :search, with: "Alf"
+    click_on "Search"
+
+    expect(page).to have_content(@alf.name)
+    expect(page).to have_content(@alf.age)
+    expect(page).to have_content(@alf.breed)
+    expect(page).to have_content(@alf.adoptable)
+    expect(page).to have_content(@alf.shelter.name)
+    expect(page).to have_content(@alfalfa.name)
+    expect(page).to have_content(@alfalfa.age)
+    expect(page).to have_content(@alfalfa.breed)
+    expect(page).to have_content(@alfalfa.adoptable)
+    expect(page).to have_content(@alfalfa.shelter.name)
+  end
+
+  it 'returns case insensitive matches on pet name searches' do
+    visit "/applications/#{@application2.id}"
+
+    fill_in :search, with: "ALF"
+    click_on "Search"
+    expect(page).to have_content(@alf.name)
+    expect(page).to have_content(@alfalfa.name)
+
+    fill_in :search, with: "OUT"
+    click_on "Search"    
+    expect(page).to have_content(@sprout.name)
   end
 end
