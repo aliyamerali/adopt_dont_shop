@@ -1,6 +1,7 @@
 <h3>Application #<%= @application.id %> </h3>
 <p><em>Status: <%= @application.status %> </em></p>
-<p>Applicant Details:</p>
+
+<h5>Applicant Details:</h5>
 <ul>
   <li><em>Name:</em> <%= @application.name %></li>
   <li><em>Address:</em> <br>
@@ -10,9 +11,13 @@
   <li><em>Testimonial:</em> <%= @application.description %></li>
 </ul>
 
-<p>Pets Applied For:</p>
-<ul>
-  <% @pets.each do |pet| %>
-  <li> <%= link_to "#{pet.name}", "/pets/#{pet.id}" %> </li>
-  <% end %>
-</ul>
+<% if @application.status == "In Progress" %>
+  <h5>Add a Pet to this Application</h5>
+<% else %>
+  <h5>Pets Applied For:</h5>
+  <ul>
+    <% @pets.each do |pet| %>
+    <li> <%= link_to "#{pet.name}", "/pets/#{pet.id}" %> </li>
+    <% end %>
+  </ul>
+<% end %>
