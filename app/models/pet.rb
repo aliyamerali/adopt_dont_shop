@@ -4,6 +4,7 @@ class Pet < ApplicationRecord
   belongs_to :shelter
   has_many :applications_pets, dependent: :destroy
   has_many :applications, through: :applications_pets, dependent: :destroy
+  
 
   def shelter_name
     shelter.name
