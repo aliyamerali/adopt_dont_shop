@@ -79,10 +79,6 @@ RSpec.describe "Application show page", type: :feature do
 
   it 'has the ability to add a pet to the application if the application is not submitted' do
     visit "/applications/#{@application2.id}"
-
-    expect(page).to have_content("Add a Pet to this Application")
-    expect(page).to have_field("Search")
-
     fill_in :search, with: "Alfalfa"
     click_on "Search"
 
@@ -94,5 +90,24 @@ RSpec.describe "Application show page", type: :feature do
     expect(page).to have_link(@alfalfa.name, href: "/pets/#{@alfalfa.id}")
   end
 
+  it 'has the ability to submit an application if it is In Progress status and has at least one pet added' do
+    visit "/applications/#{@application2.id}"
+    expect(page).to_not have_button("Submit Application")
+    expect(page).to have_content("Status: In Progress")
 
+    fill_in :search, with: "Alfalfa"
+    click_on "Search"
+    click_on "Adopt this Pet"
+
+    expect(page).to have_field("Why would you be a good home for a new pet?")
+    fill_in :description, with: "I love dogs!"
+    click_on "Submit Application"
+
+    expect(page).to have_content("Status: Pending")
+    expect(page).to have_content("This Application's Pets:")
+    expect(page).to have_content(@alfalfa.name)
+    expect(page).to have_content("Testimonial: I love dogs!")
+    expect(page).to have_link(@alfalfa.name, href: "/pets/#{@alfalfa.id}")
+    expect(page).to_not have_content("Add a Pet to this Application")
+  end
 end

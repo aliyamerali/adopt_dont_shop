@@ -8,7 +8,9 @@
                          <%= @application.street_address %> <br>
                          <%= @application.city %>, <%= @application.state %> <%= @application.zip_code %>
                        </li>
-  <li><em>Testimonial:</em> <%= @application.description %></li>
+  <% if @application.status != "In Progress" %>
+    <li><em>Testimonial:</em> <%= @application.description %></li>
+  <% end %>
 </ul>
 
 <h5>This Application's Pets:</h5>
@@ -37,5 +39,14 @@
       </tr>
     </table>
     <% end %>
+  <% end %>
+<% end %>
+
+<% if @application.status == "In Progress" && @pets.length != 0 %>
+  <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |f| %>
+    <%= f.label :description, "Why would you be a good home for a new pet?" %><br>
+    <%= f.text_area :description  %>
+    <br><br>
+    <%= f.submit "Submit Application" %>
   <% end %>
 <% end %>
