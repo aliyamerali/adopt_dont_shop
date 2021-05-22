@@ -13,6 +13,7 @@
 
 <% if @application.status == "In Progress" %>
   <h5>Add a Pet to this Application</h5>
+  <%= render partial: "shared/search", locals: {url: "/applications/#{@application.id}", method: :get, button_text: "Search"} %>
 <% else %>
   <h5>Pets Applied For:</h5>
   <ul>
