@@ -9,7 +9,6 @@ RSpec.describe "create new application", type: :feature do
     expect(page).to have_field(:city)
     expect(page).to have_field(:state)
     expect(page).to have_field(:zip_code)
-    expect(page).to have_field(:description)
   end
 
   it 'takes you to the applications show page where I see the application details' do
@@ -20,8 +19,6 @@ RSpec.describe "create new application", type: :feature do
     fill_in :city, with: 'Boulder'
     fill_in :state, with: 'CO'
     fill_in :zip_code, with: '80902'
-    fill_in :description, with: 'Doggos are the best!'
-
     click_on "Apply"
 
     expect(page).to have_current_path("/applications/#{Application.last.id}")
@@ -31,7 +28,6 @@ RSpec.describe "create new application", type: :feature do
     expect(page).to have_content("CO")
     expect(page).to have_content("80902")
     expect(page).to have_content("In Progress")
-    expect(page).to have_content("Doggos are the best!")
   end
 
   it 'returns user to the new application page if all fields not completed' do
@@ -44,6 +40,6 @@ RSpec.describe "create new application", type: :feature do
     click_on "Apply"
 
     expect(page).to have_current_path('/applications/new')
-    expect(page).to have_content("Error: State can't be blank, Zip code can't be blank, Zip code is not a number, Description can't be blank")
+    expect(page).to have_content("Error: State can't be blank, Zip code can't be blank, Zip code is not a number")
   end
 end
