@@ -27,7 +27,7 @@
     <% end %>
   <% end %>
 <% else %>
-  <h5>Pets Applied For:</h5>
+  <h5>This Application's Pets:</h5>
   <ul>
     <% @pets.each do |pet| %>
     <li> <%= link_to "#{pet.name}", "/pets/#{pet.id}" %> </li>

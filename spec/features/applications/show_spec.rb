@@ -77,5 +77,20 @@ RSpec.describe "Application show page", type: :feature do
     expect(page).to have_content(@alfalfa.shelter.name)
   end
 
+  it 'has the ability to add a pet to the application if the application is not submitted' do
+    visit "/applications/#{@application2.id}"
+
+    expect(page).to have_content("Add a Pet to this Application")
+    expect(page).to have_field("Search")
+
+    fill_in :search, with: "Alfalfa"
+    click_on "Search"
+
+    expect(page).to have_button("Adopt this Pet")
+    click_on "Adopt this Pet"
+
+    expect(page).to have_content("This Application's Pets:")
+  end
+
 
 end
