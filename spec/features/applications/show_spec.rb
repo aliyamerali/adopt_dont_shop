@@ -90,6 +90,8 @@ RSpec.describe "Application show page", type: :feature do
     click_on "Adopt this Pet"
 
     expect(page).to have_content("This Application's Pets:")
+    expect(page).to have_content(@alfalfa.name)
+    expect(page).to have_link(@alfalfa.name, href: "/pets/#{@alfalfa.id}")
   end
 
 
