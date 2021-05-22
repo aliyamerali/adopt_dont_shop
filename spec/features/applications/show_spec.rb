@@ -54,16 +54,28 @@ RSpec.describe "Application show page", type: :feature do
     expect(page).to have_content(@application1.status)
   end
 
-  it 'shows the ability to search pets if the application is not submitted' do
-    visit "/applications/#{@application2.id}"
-
-    expect(page).to have_content("Add a Pet to this Application")
-  end
-
   it 'does not show the ability to search pets if the application has been submitted' do
     visit "/applications/#{@application1.id}"
 
     expect(page).to_not have_content("Add a Pet to this Application")
   end
+
+  it 'shows the functionality to search pets if the application is not submitted' do
+    visit "/applications/#{@application2.id}"
+
+    expect(page).to have_content("Add a Pet to this Application")
+    expect(page).to have_field("Search")
+
+    fill_in :search, with: "Alfalfa"
+    click_on "Search"
+
+    expect(page).to have_current_path("/applications/#{@application2.id}?utf8=✓&search=Alfalfa&commit=Search")
+    expect(page).to have_content(@alfalfa.name)
+    expect(page).to have_content(@alfalfa.age)
+    expect(page).to have_content(@alfalfa.breed)
+    expect(page).to have_content(@alfalfa.adoptable)
+    expect(page).to have_content(@alfalfa.shelter.name)
+  end
+
 
 end
