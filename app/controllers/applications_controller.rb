@@ -3,6 +3,11 @@ class ApplicationsController < ApplicationController
   def show
     @application = Application.find(params[:id])
 
+    if params[:apply]
+      @application.update(status: "Pending")
+      @application.save
+    end
+
     if params[:search]
       @pets_search = Pet.search(params[:search])
     end

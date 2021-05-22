@@ -39,3 +39,7 @@
     <% end %>
   <% end %>
 <% end %>
+
+<% if @application.status == "In Progress" && @pets.length != 0 %>
+  <%= button_to "Submit Application", "/applications/#{@application.id}", params: {apply: true}, method: :get %>
+<% end %>
