@@ -127,6 +127,7 @@ RSpec.describe "Application show page", type: :feature do
     visit "/applications/#{@application2.id}"
 
     fill_in :search, with: "Alf"
+    click_on "Search"
 
     expect(page).to have_content(@alf.name)
     expect(page).to have_content(@alf.age)
@@ -144,10 +145,12 @@ RSpec.describe "Application show page", type: :feature do
     visit "/applications/#{@application2.id}"
 
     fill_in :search, with: "ALF"
+    click_on "Search"
     expect(page).to have_content(@alf.name)
     expect(page).to have_content(@alfalfa.name)
 
     fill_in :search, with: "OUT"
+    click_on "Search"    
     expect(page).to have_content(@sprout.name)
   end
 end
