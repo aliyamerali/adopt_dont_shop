@@ -4,7 +4,7 @@ class Pet < ApplicationRecord
   belongs_to :shelter
   has_many :applications_pets, dependent: :destroy
   has_many :applications, through: :applications_pets, dependent: :destroy
-  
+
 
   def shelter_name
     shelter.name
@@ -12,5 +12,9 @@ class Pet < ApplicationRecord
 
   def self.adoptable
     where(adoptable: true)
+  end
+
+  def self.search_adoptable(name)
+    where("adoptable = ? AND name ILIKE ?", true, "%#{name}%")
   end
 end
