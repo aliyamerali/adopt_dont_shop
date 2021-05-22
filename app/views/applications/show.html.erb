@@ -1,6 +1,7 @@
 <h3>Application #<%= @application.id %> </h3>
 <p><em>Status: <%= @application.status %> </em></p>
-<p>Applicant Details:</p>
+
+<h5>Applicant Details:</h5>
 <ul>
   <li><em>Name:</em> <%= @application.name %></li>
   <li><em>Address:</em> <br>
@@ -10,9 +11,26 @@
   <li><em>Testimonial:</em> <%= @application.description %></li>
 </ul>
 
-<p>Pets Applied For:</p>
-<ul>
-  <% @pets.each do |pet| %>
-  <li> <%= link_to "#{pet.name}", "/pets/#{pet.id}" %> </li>
+<% if @application.status == "In Progress" %>
+  <h5>Add a Pet to this Application</h5>
+  <%= render partial: "shared/search", locals: {url: "/applications/#{@application.id}", method: :get, button_text: "Search"} %>
+  <br><br>
+  <% if params[:search] %>
+    <% @pets.each do |pet| %>
+      <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
+      <ul>
+        <li> Age: <%= pet.age %> </li>
+        <li> Breed: <%= pet.breed %> </li>
+        <li> Adoptable: <%= pet.adoptable %> </li>
+        <li> You can find <%= pet.name %> at <%= pet.shelter_name %>! </li>
+      </ul>
+    <% end %>
   <% end %>
-</ul>
+<% else %>
+  <h5>Pets Applied For:</h5>
+  <ul>
+    <% @pets.each do |pet| %>
+    <li> <%= link_to "#{pet.name}", "/pets/#{pet.id}" %> </li>
+    <% end %>
+  </ul>
+<% end %>
