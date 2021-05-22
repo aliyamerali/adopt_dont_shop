@@ -1,0 +1,25 @@
+<h3>New Adoption Application:</h3>
+
+<%= form_with url: '/applications/:id', method: :post, local: true do |f| %>
+  <%= f.hidden_field :status, value: "In Progress" %>
+
+  <%= f.label :name, "Full Name: " %>
+  <%= f.text_field :name %>
+  <br><br>
+  <%= f.label :street_address, "Street Address: " %>
+  <%= f.text_field :street_address %>
+  <br><br>
+  <%= f.label :city, "City: " %>
+  <%= f.text_field :city %>
+  <br><br>
+  <%= f.label :state, "State: " %>
+  <%= f.text_field :state %>
+  <br><br>
+  <%= f.label :zip_code, "Zip Code: " %>
+  <%= f.number_field :zip_code  %>
+  <br><br>
+  <%= f.label :description, "Why would you be a good home for a new pet?" %><br>
+  <%= f.text_area :description  %>
+  <br><br>
+  <%= f.submit "Apply" %>
+<% end %>
