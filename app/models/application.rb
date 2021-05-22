@@ -10,7 +10,6 @@ class Application < ApplicationRecord
   has_many :pets, through: :applications_pets, dependent: :destroy
 
   def add_pet(pet)
-    # ApplicationsPet.create(pet: pet, application: self)
     pets << pet
   end
 
