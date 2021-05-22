@@ -5,9 +5,17 @@ RSpec.describe 'the admin shelters index' do
     @shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
     @shelter_2 = Shelter.create(name: 'RGV animal shelter', city: 'Harlingen, TX', foster_program: false, rank: 5)
     @shelter_3 = Shelter.create(name: 'Fancy pets of Colorado', city: 'Denver, CO', foster_program: true, rank: 10)
-    @shelter_1.pets.create(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: true)
-    @shelter_1.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
-    @shelter_3.pets.create(name: 'Lucille Bald', breed: 'sphynx', age: 8, adoptable: true)
+    @pirate = @shelter_1.pets.create(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: true)
+    @clawdia = @shelter_1.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
+    @lucille = @shelter_3.pets.create(name: 'Lucille Bald', breed: 'sphynx', age: 8, adoptable: true)
+
+    @pirate.applications.create!(name: "Zahra",
+                                      street_address: "7476 Park Lane Rd",
+                                      city: "Longmont",
+                                      state: "CO",
+                                      zip_code: 80503,
+                                      description: "I've got a big backyard!",
+                                      status: "Pending")
 
     visit '/admin/shelters'
   end
@@ -28,5 +36,25 @@ RSpec.describe 'the admin shelters index' do
 
     click_link(@shelter_1.name)
     expect(page).to have_current_path("/admin/shelters/#{@shelter_1.id}")
+  end
+
+  it 'has a section for shelters with pending applications' do
+    expect(page).to have_content("Shelters with Pending Applications")
+    expect(page).to have_content(@shelter_1.name)
+    expect(page).to_not have_content(@shelter_2.name)
+    expect(page).to_not have_content(@shelter_3.name)
+
+    @lucille.applications.create!(name: "Aliya",
+                                      street_address: "1243 N Lafayette",
+                                      city: "Denver",
+                                      state: "CO",
+                                      zip_code: 80218,
+                                      description: "I love animals!",
+                                      status: "Pending")
+
+    visit '/admin/shelters'
+    expect(page).to have_content(@shelter_1.name)
+    expect(page).to have_content(@shelter_3.name)
+    expect(page).to_not have_content(@shelter_2.name)
   end
 end
