@@ -40,10 +40,11 @@ RSpec.describe 'the admin shelters index' do
 
   it 'has a section for shelters with pending applications' do
     expect(page).to have_content("Shelters with Pending Applications")
-    expect(page).to have_content(@shelter_1.name)
-    expect(page).to_not have_content(@shelter_2.name)
-    expect(page).to_not have_content(@shelter_3.name)
-
+    within('.shelters-with-pending') do
+      expect(page).to have_content(@shelter_1.name)
+      expect(page).to_not have_content(@shelter_2.name)
+      expect(page).to_not have_content(@shelter_3.name)
+    end
     @lucille.applications.create!(name: "Aliya",
                                       street_address: "1243 N Lafayette",
                                       city: "Denver",
@@ -53,8 +54,11 @@ RSpec.describe 'the admin shelters index' do
                                       status: "Pending")
 
     visit '/admin/shelters'
-    expect(page).to have_content(@shelter_1.name)
-    expect(page).to have_content(@shelter_3.name)
-    expect(page).to_not have_content(@shelter_2.name)
+    
+    within('.shelters-with-pending') do
+      expect(page).to have_content(@shelter_1.name)
+      expect(page).to have_content(@shelter_3.name)
+      expect(page).to_not have_content(@shelter_2.name)
+    end
   end
 end
