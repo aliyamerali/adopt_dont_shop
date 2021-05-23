@@ -11,6 +11,16 @@ class SheltersController < ApplicationController
 
   def admin_index
     @shelters = Shelter.reverse_order_by_name
+    # binding.pry
+    # @shelters_with_pending = Shelter.pets.applications.where(status: "Pending")
+     @shelters_with_pending = Shelter.find_by_sql("
+      SELECT DISTINCT shelters.id as id, shelters.name as name
+      FROM shelters
+        JOIN pets ON shelters.id = pets.shelter_id
+        JOIN applications_pets ON pets.id = applications_pets.pet_id
+        JOIN applications ON applications_pets.application_id = applications.id
+      WHERE applications.status LIKE 'Pending'
+    ")
   end
 
   def pets
