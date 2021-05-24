@@ -38,6 +38,7 @@ class ApplicationsController < ApplicationController
   end
 
   def admin_show
+    # binding.pry
     @application = Application.find(params[:id])
     @pets = @application.pets
   end

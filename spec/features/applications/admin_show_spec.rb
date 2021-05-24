@@ -21,7 +21,6 @@ RSpec.describe 'Applications admin show page', type: :feature do
   end
 
   it 'shows a button for every pet that the application is for, there is a button to approve' do
-    # save_and_open_page
     within('.MrPirate') do
       expect(page).to have_button("Approve")
     end
@@ -31,5 +30,22 @@ RSpec.describe 'Applications admin show page', type: :feature do
     within(".LucilleBald") do
       expect(page).to have_button("Approve")
     end
+  end
+
+  it 'upon selecting "Approve", page refreshes with status approved and no option to approve again' do
+    within('.MrPirate') do
+      click_button("Approve")
+    end
+
+    within('.MrPirate') do
+      expect(page).to have_button("Application approved for this pet")
+    end
+    within(".Clawdia") do
+      expect(page).to have_button("Approve")
+    end
+    within(".LucilleBald") do
+      expect(page).to have_button("Approve")
+    end
+
   end
 end
