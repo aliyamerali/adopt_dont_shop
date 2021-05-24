@@ -1,0 +1,12 @@
+<h3>Application #<%= @application.id %> </h3>
+<p><em>Status: <%= @application.status %> </em></p>
+
+<h5>This Application's Pets:</h5>
+<table>
+  <% @pets.each do |pet| %>
+  <tr class=<%=pet.name.gsub(/[!@%&". ]/,'')%>>
+    <td> <%= link_to "#{pet.name}", "/pets/#{pet.id}" %> </td>
+    <td> <%= button_to "Approve", "/applications/admin/#{@application.id}", params: {approve: pet.id}, method: :get%></td>
+  </tr>
+  <% end %>
+</table>

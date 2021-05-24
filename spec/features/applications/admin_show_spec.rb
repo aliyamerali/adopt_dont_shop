@@ -21,14 +21,15 @@ RSpec.describe 'Applications admin show page', type: :feature do
   end
 
   it 'shows a button for every pet that the application is for, there is a button to approve' do
-    within(".approve-for-#{@pirate.name}") do
-      expect(page).to have_content("Approve")
+    # save_and_open_page
+    within('.MrPirate') do
+      expect(page).to have_button("Approve")
     end
-    within(".approve-for-#{@clawdia.name}") do
-      expect(page).to have_content("Approve")
+    within(".Clawdia") do
+      expect(page).to have_button("Approve")
     end
-    within(".approve-for-#{@lucille.name}") do
-      expect(page).to have_content("Approve")
+    within(".LucilleBald") do
+      expect(page).to have_button("Approve")
     end
   end
 end

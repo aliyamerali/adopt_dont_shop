@@ -3,8 +3,6 @@ class ApplicationsController < ApplicationController
   def show
     @application = Application.find(params[:id])
     if params[:commit] == "Submit Application"
-      # @application.update(status: "Pending", description: params[:description])
-      # @application.save
       if @application.update(status: "Pending", description: params[:description])
         @application.save
       else
@@ -37,6 +35,11 @@ class ApplicationsController < ApplicationController
       redirect_to '/applications/new'
       flash[:alert] = "Error: #{error_message(application.errors)}"
     end
+  end
+
+  def admin_show
+    @application = Application.find(params[:id])
+    @pets = @application.pets
   end
 
   private
