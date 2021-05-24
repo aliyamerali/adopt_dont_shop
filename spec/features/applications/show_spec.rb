@@ -4,7 +4,7 @@ RSpec.describe "Application show page", type: :feature do
   before :each do
     @shelter = Shelter.create!(name: "Denver Animal Rescue", city: "Denver", rank: 1, foster_program: true)
     @application1 = Application.create!(name: "Aliya",
-                                      street_address: "1243 N Lafayette",
+                                      street_address: "2525 Broad Street",
                                       city: "Denver",
                                       state: "CO",
                                       zip_code: 80218,

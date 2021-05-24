@@ -42,14 +42,14 @@ vet_office3.veterinarians.create!(name: "Dr. Pepper", on_call: false, review_rat
 
 
 application1 = Application.create!(name: "Aliya",
-                                  street_address: "1243 N Lafayette",
+                                  street_address: "2525 Broad Street",
                                   city: "Denver",
                                   state: "CO",
                                   zip_code: 80218,
                                   description: "I love animals!",
                                   status: "Pending")
 application2 = Application.create!(name: "Zahra",
-                                  street_address: "7476 Park Lane Rd",
+                                  street_address: "1000 Park Avenue",
                                   city: "Longmont",
                                   state: "CO",
                                   zip_code: 80503,

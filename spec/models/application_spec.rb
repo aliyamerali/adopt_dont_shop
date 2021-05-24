@@ -12,7 +12,7 @@ RSpec.describe Application, type: :model do
       pet = shelter.pets.create!(name: "Linus", breed: "Pitbull", age: 3, adoptable: true)
 
       application = Application.create!(name: "Aliya",
-                                        street_address: "1243 N Lafayette",
+                                        street_address: "2525 Broad Street",
                                         city: "Denver",
                                         state: "CO",
                                         zip_code: 80218,
