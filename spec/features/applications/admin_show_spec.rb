@@ -118,29 +118,25 @@ RSpec.describe 'Applications admin show page', type: :feature do
       click_button("Approve")
     end
 
-    expect(@pirate.adoptable).to eq(true)
-    expect(@clawdia.adoptable).to eq(true)
-    expect(@lucille.adoptable).to eq(true)
-
     within(".Clawdia") do
       click_button("Approve")
     end
 
-    expect(@pirate.adoptable).to eq(true)
-    expect(@clawdia.adoptable).to eq(true)
-    expect(@lucille.adoptable).to eq(true)
+    expect(@pirate.reload.adoptable).to eq(true)
+    expect(@clawdia.reload.adoptable).to eq(true)
+    expect(@lucille.reload.adoptable).to eq(true)
 
     within(".LucilleBald") do
       click_button("Approve")
     end
 
-    expect(@pirate.adoptable).to eq(false)
-    expect(@clawdia.adoptable).to eq(false)
-    expect(@lucille.adoptable).to eq(false)
-
+    expect(@pirate.reload.adoptable).to eq(false)
+    expect(@clawdia.reload.adoptable).to eq(false)
+    expect(@lucille.reload.adoptable).to eq(false)
 
     expect(page).to have_current_path("/admin/applications/#{@application.id}")
     expect(page).to have_content("Status: Approved")
+    expect(@application.reload.status).to eq("Approved")
   end
 
   it 'updates the app status to rejected if all pets are approved/rejected, with at least one rejection' do
@@ -164,5 +160,7 @@ RSpec.describe 'Applications admin show page', type: :feature do
 
     expect(page).to have_current_path("/admin/applications/#{@application.id}")
     expect(page).to have_content("Status: Rejected")
+    expect(@application.reload.status).to eq("Rejected")
+
   end
 end

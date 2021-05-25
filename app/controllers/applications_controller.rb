@@ -43,9 +43,13 @@ class ApplicationsController < ApplicationController
 
     if @apps_pets.where("status = ?" , 'approved').count == @apps_pets.count
       @application.update(status: "Approved")
+      @apps_pets.each do |apps_pet|
+        apps_pet.pet.update(adoptable: false)
+      end
     elsif @apps_pets.where("status = ? or status = ?",'approved','rejected').count == @apps_pets.count
       @application.update(status: "Rejected")
     end
+
   end
 
   def admin_update
