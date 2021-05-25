@@ -14,6 +14,13 @@ RSpec.describe 'Applications admin show page', type: :feature do
                                       zip_code: 80503,
                                       description: "I've got a big backyard!",
                                       status: "Pending")
+    @application2 = @pirate.applications.create!(name: "Liz Lemon",
+                                      street_address: "234 Broadway",
+                                      city: "NYC",
+                                      state: "NY",
+                                      zip_code: 11234,
+                                      description: "I live by a park",
+                                      status: "Pending")
     @application.pets << @clawdia
     @application.pets << @lucille
 
@@ -68,6 +75,34 @@ RSpec.describe 'Applications admin show page', type: :feature do
       expect(page).to have_button("Reject")
     end
     within(".LucilleBald") do
+      expect(page).to have_button("Approve")
+      expect(page).to have_button("Reject")
+    end
+  end
+
+  it 'updates status of application\'s pets for that application only' do
+    within('.MrPirate') do
+      expect(page).to have_button("Approve")
+      expect(page).to have_button("Reject")
+    end
+
+    visit "/admin/applications/#{@application2.id}"
+    within('.MrPirate') do
+      expect(page).to have_button("Approve")
+      expect(page).to have_button("Reject")
+    end
+
+    visit "/admin/applications/#{@application.id}"
+    within('.MrPirate') do
+      expect(page).to have_button("Approve")
+      expect(page).to have_button("Reject")
+      click_button("Reject")
+      expect(page).to_not have_button("Approve")
+      expect(page).to_not have_button("Reject")
+    end
+
+    visit "/admin/applications/#{@application2.id}"
+    within('.MrPirate') do
       expect(page).to have_button("Approve")
       expect(page).to have_button("Reject")
     end
