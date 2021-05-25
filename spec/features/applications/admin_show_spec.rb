@@ -108,18 +108,36 @@ RSpec.describe 'Applications admin show page', type: :feature do
     end
   end
 
-  it 'updates the application status if all pets are approved' do
+  it 'updates app status to approved if all pets are approved and marks pets as not adoptable' do
     expect(page).to have_content("Status: Pending")
+    expect(@pirate.adoptable).to eq(true)
+    expect(@clawdia.adoptable).to eq(true)
+    expect(@lucille.adoptable).to eq(true)
 
     within('.MrPirate') do
       click_button("Approve")
     end
+
+    expect(@pirate.adoptable).to eq(true)
+    expect(@clawdia.adoptable).to eq(true)
+    expect(@lucille.adoptable).to eq(true)
+
     within(".Clawdia") do
       click_button("Approve")
     end
+
+    expect(@pirate.adoptable).to eq(true)
+    expect(@clawdia.adoptable).to eq(true)
+    expect(@lucille.adoptable).to eq(true)
+
     within(".LucilleBald") do
       click_button("Approve")
     end
+
+    expect(@pirate.adoptable).to eq(false)
+    expect(@clawdia.adoptable).to eq(false)
+    expect(@lucille.adoptable).to eq(false)
+
 
     expect(page).to have_current_path("/admin/applications/#{@application.id}")
     expect(page).to have_content("Status: Approved")
