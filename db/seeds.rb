@@ -56,7 +56,7 @@ application2 = Application.create!(name: "Zahra",
                                   description: "I've got a big backyard!",
                                   status: "Pending")
 
-ApplicationsPet.create!(pet: pet1, application: application1, status: "New")
-ApplicationsPet.create!(pet: pet2, application: application1, status: "New")
-ApplicationsPet.create!(pet: pet2, application: application2, status: "New")
-ApplicationsPet.create!(pet: pet3, application: application2, status: "New")
+ApplicationsPet.create!(pet: pet1, application: application1, status: nil)
+ApplicationsPet.create!(pet: pet2, application: application1, status: nil)
+ApplicationsPet.create!(pet: pet2, application: application2, status: nil)
+ApplicationsPet.create!(pet: pet3, application: application2, status: nil)
