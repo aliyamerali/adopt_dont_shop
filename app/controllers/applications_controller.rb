@@ -38,9 +38,17 @@ class ApplicationsController < ApplicationController
   end
 
   def admin_show
-    # binding.pry
     @application = Application.find(params[:id])
     @pets = @application.pets
+    @app_status = ApplicationsPet.joins(:pet).where(application_id: @application.id)
+  end
+
+  def admin_approve
+    @pet = Pet.find(params[:approve_pet])
+    @application = Application.find(params[:id])
+    @join_record = ApplicationsPet.where(pet_id: @pet.id).where(application_id: @application.id)
+    @join_record.update(status: "Approved")
+    redirect_to "/admin/applications/#{@application.id}"
   end
 
   private

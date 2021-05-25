@@ -38,7 +38,7 @@ RSpec.describe 'Applications admin show page', type: :feature do
     end
 
     within('.MrPirate') do
-      expect(page).to have_button("Application approved for this pet")
+      expect(page).to have_content("Application approved for this pet")
     end
     within(".Clawdia") do
       expect(page).to have_button("Approve")

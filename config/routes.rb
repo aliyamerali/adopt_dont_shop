@@ -47,4 +47,5 @@ Rails.application.routes.draw do
   #Admin application view
   # get '/admin/applications/', to: 'applications#admin_index'
   get '/admin/applications/:id', to: 'applications#admin_show'
+  patch '/admin/applications/:id', to:'applications#admin_approve'
 end
