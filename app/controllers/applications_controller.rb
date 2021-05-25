@@ -43,6 +43,8 @@ class ApplicationsController < ApplicationController
 
     if @apps_pets.where("status = ?" , 'approved').count == @apps_pets.count
       @application.update(status: "Approved")
+    elsif @apps_pets.where("status = ? or status = ?",'approved','rejected').count == @apps_pets.count
+      @application.update(status: "Rejected")
     end
   end
 
