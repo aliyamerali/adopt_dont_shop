@@ -31,7 +31,7 @@ class SheltersController < ApplicationController
   end
 
   def admin_show
-    @shelter = Shelter.find(params[:id])
+    @shelter = Shelter.find_by_sql("SELECT name, city FROM shelters WHERE id = #{params[:id]}")
   end
 
   def new

@@ -1,7 +1,3 @@
-<h2> <%= @shelter.name %> </h2>
+<h2> <%= @shelter[0].name %> </h2>
 
-<ul>
-  <li>City: <%= @shelter.city %></li>
-  <li>Foster Program? <%= @shelter.foster_program %> </li>
-  <li>Rank: <%=@shelter.rank %> </li>
-</ul>
+<p>Address: <%= @shelter[0].city %></p>
