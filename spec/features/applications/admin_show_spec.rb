@@ -45,6 +45,7 @@ RSpec.describe 'Applications admin show page', type: :feature do
   it 'for a not-adoptable pet that the application is for, there is a note and a button to reject' do
     @pirate.update(adoptable: false)
     @lucille.update(adoptable: false)
+    visit "/admin/applications/#{@application.id}"
 
     within('.MrPirate') do
       expect(page).to have_content("Approved for adoption with another applicant.")
