@@ -3,17 +3,15 @@
 
 <h5>This Application's Pets:</h5>
 <table>
-  <% @pets.each do |pet| %>
-  <tr class=<%=pet.name.gsub(/[!@%&". ]/,'')%>>
-    <td> <%= link_to "#{pet.name}", "/pets/#{pet.id}" %> </td>
+  <% @apps_pets.each do |apps_pet| %>
+  <tr class=<%=apps_pet.pet.name.gsub(/[!@%&". ]/,'')%>>
+    <td> <%= link_to "#{apps_pet.pet.name}", "/pets/#{apps_pet.pet.id}" %> </td>
     <td>
-      <% if @app_status.find_by(pet_id: pet.id).status == "Approved" %>
-        <p>Application approved for this pet</p>
-      <% elsif @app_status.find_by(pet_id: pet.id).status == "Rejected" %>
-        <p>Application rejected for this pet</p>
+      <% if apps_pet.status != nil %>
+        <p>Application <%=apps_pet.status.downcase%> for this pet</p>
       <% else %>
-        <%= button_to "Approve", "/admin/applications/#{@application.id}", params: {approve_pet: pet.id}, method: :patch%>
-        <%= button_to "Reject", "/admin/applications/#{@application.id}", params: {reject_pet: pet.id}, method: :patch%>
+        <%= button_to "Approve", "/admin/applications/#{@application.id}", params: {pet: apps_pet.pet.id, status: 'approved'}, method: :patch%>
+        <%= button_to "Reject", "/admin/applications/#{@application.id}", params: {pet: apps_pet.pet.id, status: 'rejected'}, method: :patch%>
       <% end %>
     </td>
   </tr>
