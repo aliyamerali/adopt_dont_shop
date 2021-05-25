@@ -27,7 +27,7 @@ RSpec.describe 'Applications admin show page', type: :feature do
     visit "/admin/applications/#{@application.id}"
   end
 
-  it 'for every pet that the application is for, there are buttons to approve or reject' do
+  it 'for every adoptable pet that the application is for, there are buttons to approve or reject' do
     within('.MrPirate') do
       expect(page).to have_button("Approve")
       expect(page).to have_button("Reject")
@@ -38,6 +38,26 @@ RSpec.describe 'Applications admin show page', type: :feature do
     end
     within(".LucilleBald") do
       expect(page).to have_button("Approve")
+      expect(page).to have_button("Reject")
+    end
+  end
+
+  it 'for a not-adoptable pet that the application is for, there is a note and a button to reject' do
+    @pirate.update(adoptable: false)
+    @lucille.update(adoptable: false)
+    visit "/admin/applications/#{@application.id}"
+
+    within('.MrPirate') do
+      expect(page).to have_content("Approved for adoption with another applicant.")
+      expect(page).to have_button("Reject")
+    end
+    within(".Clawdia") do
+      expect(page).to have_button("Approve")
+      expect(page).to have_button("Reject")
+      expect(page).to_not have_content("Approved for adoption with another applicant.")
+    end
+    within(".LucilleBald") do
+      expect(page).to have_content("Approved for adoption with another applicant.")
       expect(page).to have_button("Reject")
     end
   end
