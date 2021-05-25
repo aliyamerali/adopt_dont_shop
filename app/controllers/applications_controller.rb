@@ -43,11 +43,17 @@ class ApplicationsController < ApplicationController
     @app_status = ApplicationsPet.joins(:pet).where(application_id: @application.id)
   end
 
-  def admin_approve
-    @pet = Pet.find(params[:approve_pet])
+  def admin_update
     @application = Application.find(params[:id])
-    @join_record = ApplicationsPet.where(pet_id: @pet.id).where(application_id: @application.id)
-    @join_record.update(status: "Approved")
+    if params[:approve_pet]
+      @pet = Pet.find(params[:approve_pet])
+      @join_record = ApplicationsPet.where(pet_id: @pet.id).where(application_id: @application.id)
+      @join_record.update(status: "Approved")
+    elsif params[:reject_pet]
+      @pet = Pet.find(params[:reject_pet])
+      @join_record = ApplicationsPet.where(pet_id: @pet.id).where(application_id: @application.id)
+      @join_record.update(status: "Rejected")
+    end
     redirect_to "/admin/applications/#{@application.id}"
   end
 

@@ -42,6 +42,8 @@ RSpec.describe 'Applications admin show page', type: :feature do
 
     within('.MrPirate') do
       expect(page).to have_content("Application approved for this pet")
+      expect(page).to_not have_button("Approve")
+      expect(page).to_not have_button("Reject")
     end
     within(".Clawdia") do
       expect(page).to have_button("Approve")
@@ -58,6 +60,8 @@ RSpec.describe 'Applications admin show page', type: :feature do
 
     within('.MrPirate') do
       expect(page).to have_content("Application rejected for this pet")
+      expect(page).to_not have_button("Approve")
+      expect(page).to_not have_button("Reject")
     end
     within(".Clawdia") do
       expect(page).to have_button("Approve")
