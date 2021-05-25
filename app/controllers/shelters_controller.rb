@@ -11,7 +11,7 @@ class SheltersController < ApplicationController
 
   def admin_index
     @shelters = Shelter.reverse_order_by_name
-    @shelters_with_pending = Shelter.joins(pets: :applications).where('applications.status'=> "Pending")
+    @shelters_with_pending = Shelter.joins(pets: :applications).where('applications.status'=> "Pending").distinct.order(:name)
   end
 
   def pets
