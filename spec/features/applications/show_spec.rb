@@ -4,7 +4,7 @@ RSpec.describe "Application show page", type: :feature do
   before :each do
     @shelter = Shelter.create!(name: "Denver Animal Rescue", city: "Denver", rank: 1, foster_program: true)
     @application1 = Application.create!(name: "Aliya",
-                                      street_address: "1243 N Lafayette",
+                                      street_address: "2525 Broad Street",
                                       city: "Denver",
                                       state: "CO",
                                       zip_code: 80218,
@@ -116,6 +116,21 @@ RSpec.describe "Application show page", type: :feature do
     expect(page).to_not have_content("Add a Pet to this Application")
   end
 
+  it 'throws an error if no description submitted' do
+    visit "/applications/#{@application2.id}"
+    expect(page).to_not have_button("Submit Application")
+    expect(page).to have_content("Status: In Progress")
+
+    fill_in :search, with: "Alfalfa"
+    click_on "Search"
+    click_on "Adopt this Pet"
+
+    expect(page).to have_field("Why would you be a good home for a new pet?")
+    click_on "Submit Application"
+
+    expect(page).to have_content("Error: Description can't be blank")
+  end
+
   it 'does not show the option to submit if no pets are added' do
     visit "/applications/#{@application2.id}"
 
@@ -150,7 +165,7 @@ RSpec.describe "Application show page", type: :feature do
     expect(page).to have_content(@alfalfa.name)
 
     fill_in :search, with: "OUT"
-    click_on "Search"    
+    click_on "Search"
     expect(page).to have_content(@sprout.name)
   end
 end

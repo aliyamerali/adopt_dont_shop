@@ -3,8 +3,12 @@ class ApplicationsController < ApplicationController
   def show
     @application = Application.find(params[:id])
     if params[:commit] == "Submit Application"
-      @application.update(status: "Pending", description: params[:description])
-      @application.save
+      if @application.update(status: "Pending", description: params[:description])
+        @application.save
+      else
+        flash[:alert] = "Error: #{error_message(@application.errors)}"
+        redirect_to "/applications/#{params[:id]}"
+      end
     end
 
     if params[:search]
@@ -31,6 +35,20 @@ class ApplicationsController < ApplicationController
       redirect_to '/applications/new'
       flash[:alert] = "Error: #{error_message(application.errors)}"
     end
+  end
+
+  def admin_show
+    @application = Application.find(params[:id])
+    @pets = @application.pets
+    @app_status = ApplicationsPet.joins(:pet).where(application_id: @application.id)
+  end
+
+  def admin_approve
+    @pet = Pet.find(params[:approve_pet])
+    @application = Application.find(params[:id])
+    @join_record = ApplicationsPet.where(pet_id: @pet.id).where(application_id: @application.id)
+    @join_record.update(status: "Approved")
+    redirect_to "/admin/applications/#{@application.id}"
   end
 
   private

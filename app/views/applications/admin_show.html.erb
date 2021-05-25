@@ -1,0 +1,18 @@
+<h3>Application #<%= @application.id %> </h3>
+<p><em>Status: <%= @application.status %> </em></p>
+
+<h5>This Application's Pets:</h5>
+<table>
+  <% @pets.each do |pet| %>
+  <tr class=<%=pet.name.gsub(/[!@%&". ]/,'')%>>
+    <td> <%= link_to "#{pet.name}", "/pets/#{pet.id}" %> </td>
+    <td>
+      <% if @app_status.find_by(pet_id: pet.id).status == "Approved" %>
+        <p>Application approved for this pet</p>
+      <% else %>
+        <%= button_to "Approve", "/admin/applications/#{@application.id}", params: {approve_pet: pet.id}, method: :patch%>
+      <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>

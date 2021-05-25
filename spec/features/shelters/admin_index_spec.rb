@@ -10,7 +10,7 @@ RSpec.describe 'the admin shelters index' do
     @lucille = @shelter_3.pets.create(name: 'Lucille Bald', breed: 'sphynx', age: 8, adoptable: true)
 
     @pirate.applications.create!(name: "Zahra",
-                                      street_address: "7476 Park Lane Rd",
+                                      street_address: "1000 Park Avenue",
                                       city: "Longmont",
                                       state: "CO",
                                       zip_code: 80503,
@@ -46,7 +46,7 @@ RSpec.describe 'the admin shelters index' do
       expect(page).to_not have_content(@shelter_3.name)
     end
     @lucille.applications.create!(name: "Aliya",
-                                      street_address: "1243 N Lafayette",
+                                      street_address: "2525 Broad Street",
                                       city: "Denver",
                                       state: "CO",
                                       zip_code: 80218,
@@ -54,7 +54,7 @@ RSpec.describe 'the admin shelters index' do
                                       status: "Pending")
 
     visit '/admin/shelters'
-    
+
     within('.shelters-with-pending') do
       expect(page).to have_content(@shelter_1.name)
       expect(page).to have_content(@shelter_3.name)
