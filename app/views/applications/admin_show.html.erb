@@ -3,9 +3,11 @@
 
 <table>
   <th><h5>This Application's Pets</h5></th>
+
   <% @apps_pets.each do |apps_pet| %>
   <tr class=<%=apps_pet.pet.name.gsub(/[!@%&". ]/,'')%>>
     <td> <%= render partial: "/shared/name_as_link", locals: {resource: apps_pet.pet} %></td>
+
     <% if apps_pet.status != nil %>
       <td><p>Application <%=apps_pet.status.downcase%> for this pet</p></td>
     <% elsif apps_pet.status == nil  && apps_pet.pet.adoptable %>
@@ -13,6 +15,7 @@
     <% elsif apps_pet.status == nil  && !apps_pet.pet.adoptable %>
       <%= render partial: "/shared/pet_app_reject", locals: {resource: apps_pet} %>
     <% end %>
+    
   </tr>
   <% end %>
 </table>
