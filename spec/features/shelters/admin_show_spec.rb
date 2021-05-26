@@ -10,17 +10,24 @@ RSpec.describe 'the admin shelters index' do
     @lucille = @shelter_2.pets.create(name: 'Lucille Bald', breed: 'sphynx', age: 8, adoptable: true)
 
     @application_1 = @pirate.applications.create!(name: "Zahra",
-                                street_address: "1000 Park Avenue",
-                                city: "Longmont",
-                                state: "CO",
-                                zip_code: 80503,
-                                description: "I've got a big backyard!",
-                                status: "Pending")
+                                  street_address: "1000 Park Avenue",
+                                  city: "Longmont",
+                                  state: "CO",
+                                  zip_code: 80503,
+                                  description: "I've got a big backyard!",
+                                  status: "Pending")
     @application_2 = @clawdia.applications.create!(name: "Aliya",
                                   street_address: "2525 Broad Street",
                                   city: "Denver",
                                   state: "CO",
                                   zip_code: 80218,
+                                  description: "I love animals!",
+                                  status: "Pending")
+    @application_3 = @clawdia.applications.create!(name: "John Denver",
+                                  street_address: "2342 Maple Street",
+                                  city: "Boulder",
+                                  state: "CO",
+                                  zip_code: 80209,
                                   description: "I love animals!",
                                   status: "Pending")
     @application_2.pets << @lucille
@@ -51,6 +58,23 @@ RSpec.describe 'the admin shelters index' do
 
       within(".statistics") do
         expect(page).to have_content("Count of Pets Adopted from #{@shelter.name}: 1")
+      end
+    end
+  end
+
+  describe 'action required section' do
+    it 'shows a list of pets at the shelter that have pending applications' do
+      within(".action_required") do
+        expect(page).to have_content(@pirate.name)
+        expect(page).to have_content(@clawdia.name)
+      end
+    end
+
+    it 'links to the admin/application show page(s) to accept or reject the pet' do
+      within(".action_required") do
+        expect(page).to have_link("Application 1", href: "/admin/applications/#{@application_1.id}")
+        expect(page).to have_link("Application 1", href: "/admin/applications/#{@application_2.id}")
+        expect(page).to have_link("Application 1", href: "/admin/applications/#{@application_3.id}")
       end
     end
   end
