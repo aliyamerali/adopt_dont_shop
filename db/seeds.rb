@@ -11,9 +11,9 @@ Shelter.destroy_all
 Veterinarian.destroy_all
 VeterinaryOffice.destroy_all
 
-shelter1 = Shelter.create!(name: "Denver Animal Rescue", city: "Denver", rank: 1, foster_program: true)
-shelter2 = Shelter.create!(name: "Boulder Shelter", city: "Boulder", rank: 2, foster_program: false)
-shelter3 = Shelter.create!(name: "Fort Collins Pets", city: "Fort Collins", rank: 3, foster_program: true)
+shelter1 = Shelter.create!(name: "Denver Animal Rescue", city: "Denver", rank: 1, foster_program: true, street_address: "123 Colfax Ave", state: "CO", zip_code: 80218)
+shelter2 = Shelter.create!(name: "Boulder Shelter", city: "Boulder", rank: 2, foster_program: false, street_address: "456 Broadway", state: "CO", zip_code: 80501)
+shelter3 = Shelter.create!(name: "Fort Collins Pets", city: "Fort Collins", rank: 3, foster_program: true, street_address: "789 Main St", state: "CO", zip_code: 83456)
 
 pet1 = shelter1.pets.create!(name: "Linus", breed: "Pitbull", age: 3, adoptable: true)
 pet2 = shelter1.pets.create!(name: "Dorothy", breed: "Tabby", age: 4, adoptable: true)
