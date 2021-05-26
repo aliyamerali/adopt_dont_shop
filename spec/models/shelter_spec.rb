@@ -92,6 +92,31 @@ RSpec.describe Shelter, type: :model do
         expect(Shelter.count_adopted(@shelter_1.id)).to eq(0)
       end
     end
+
+    describe '#pets_with_pending' do
+      it 'returns the names and application id#s of pets with pending apps at a given shelter' do
+        app1 = @pet_4.applications.create!(name: "Zahra",
+                                          street_address: "1000 Park Avenue",
+                                          city: "Longmont",
+                                          state: "CO",
+                                          zip_code: 80503,
+                                          description: "I've got a big backyard!",
+                                          status: "Pending")
+        app2 = @pet_2.applications.create!(name: "John",
+                                          street_address: "1000 Park Avenue",
+                                          city: "Boulder",
+                                          state: "CO",
+                                          zip_code: 80503,
+                                          description: "I've got a big backyard!",
+                                          status: "Pending")
+
+        expect(Shelter.pets_with_pending(@shelter_1.id).count).to eq(2)
+        expect(Shelter.pets_with_pending(@shelter_1.id).first.app_id).to eq(app1.id)
+        expect(Shelter.pets_with_pending(@shelter_1.id).first.pet_name).to eq(@pet_1.name)
+        expect(Shelter.pets_with_pending(@shelter_1.id).second.app_id).to eq(app2.id)
+        expect(Shelter.pets_with_pending(@shelter_1.id).second.pet_name).to eq(@pet_1.name)
+      end
+    end
   end
 
   describe 'instance methods' do
