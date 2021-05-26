@@ -27,6 +27,18 @@ class Shelter < ApplicationRecord
     joins(pets: :applications).where('applications.status'=> "Pending").distinct.order(:name)
   end
 
+  def self.avg_age_adoptables(shelter_id)
+    joins(:pets).where('pets.adoptable = ? and shelters.id = ?', true, shelter_id).average(:age).round(2)
+  end
+
+  def self.count_adoptables(shelter_id)
+    Shelter.joins(:pets).where('pets.adoptable = ? and shelters.id = ?', true, shelter_id).count
+  end
+
+  def self.count_adopted(shelter_id)
+    Shelter.joins(pets: :applications).where('applications.status = ? and shelters.id = ?', 'Approved', shelter_id).count
+  end
+
   def pet_count
     pets.count
   end
@@ -42,4 +54,5 @@ class Shelter < ApplicationRecord
   def shelter_pets_filtered_by_age(age_filter)
     adoptable_pets.where('age >= ?', age_filter)
   end
+
 end

@@ -1,3 +1,14 @@
 <h2> <%= @shelter[0].name %> </h2>
 
 <p>Address: <%= @shelter[0].city %></p>
+
+<section class="statistics">
+  <h4>Shelter Statistics</h4>
+
+  <ul>
+    <li>Average Age of Adoptable Pets: <%=@avg_age_adoptable_pets%></li>
+    <li>Count of Adoptable Pets: <%=@count_adoptable_pets%></li>
+    <li>Count of Pets Adopted from <%=@shelter[0].name%>: <%=@count_pets_adopted%></li>
+  </ul>
+
+</section>
