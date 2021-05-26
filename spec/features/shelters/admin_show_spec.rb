@@ -4,9 +4,10 @@ RSpec.describe 'the admin shelters index' do
 
   before :each do
     @shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+    @shelter_2 = Shelter.create(name: 'RGV animal shelter', city: 'Harlingen, TX', foster_program: false, rank: 5)
     @pirate = @shelter.pets.create(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: true)
     @clawdia = @shelter.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
-    @lucille = @shelter.pets.create(name: 'Lucille Bald', breed: 'sphynx', age: 8, adoptable: true)
+    @lucille = @shelter_2.pets.create(name: 'Lucille Bald', breed: 'sphynx', age: 8, adoptable: true)
 
     @application_1 = @pirate.applications.create!(name: "Zahra",
                                 street_address: "1000 Park Avenue",
@@ -34,13 +35,13 @@ RSpec.describe 'the admin shelters index' do
   describe 'statistics section' do
     it 'shows average age of all adoptable pets at that shelter' do
       within(".statistics") do
-        expect(page).to have_content("Average Age of Adoptable Pets: 5.33")
+        expect(page).to have_content("Average Age of Adoptable Pets: 4")
       end
     end
 
     it 'shows number of pets at that shelter that are adoptable' do
       within(".statistics") do
-        expect(page).to have_content("Count of Adoptable Pets: 3")
+        expect(page).to have_content("Count of Adoptable Pets: 2")
       end
     end
 
