@@ -21,6 +21,28 @@ RSpec.describe Shelter, type: :model do
     @pet_2 = @shelter_1.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
     @pet_3 = @shelter_3.pets.create(name: 'Lucille Bald', breed: 'sphynx', age: 8, adoptable: true)
     @pet_4 = @shelter_1.pets.create(name: 'Ann', breed: 'ragdoll', age: 5, adoptable: true)
+
+    @app_1 = @pet_1.applications.create!(name: "Aliya",
+                                street_address: "2525 Broad Street",
+                                city: "Denver",
+                                state: "CO",
+                                zip_code: 80218,
+                                description: "I love animals!",
+                                status: "Pending")
+    @app_2 = @pet_2.applications.create!(name: "John",
+                                street_address: "1000 Park Avenue",
+                                city: "Boulder",
+                                state: "CO",
+                                zip_code: 80503,
+                                description: "I've got a big backyard!",
+                                status: "Pending")
+    @app_3 = @pet_3.applications.create!(name: "Zahra",
+                                street_address: "1000 Park Avenue",
+                                city: "Longmont",
+                                state: "CO",
+                                zip_code: 80503,
+                                description: "I've got a big backyard!",
+                                status: "Pending")
   end
 
   describe 'class methods' do
@@ -50,27 +72,6 @@ RSpec.describe Shelter, type: :model do
 
     describe '#with_pending_apps_alpha' do
       it 'returns distinct shelters with pending applications sorted alphabetically' do
-        @pet_3.applications.create!(name: "Zahra",
-                                          street_address: "1000 Park Avenue",
-                                          city: "Longmont",
-                                          state: "CO",
-                                          zip_code: 80503,
-                                          description: "I've got a big backyard!",
-                                          status: "Pending")
-        @pet_2.applications.create!(name: "John",
-                                          street_address: "1000 Park Avenue",
-                                          city: "Boulder",
-                                          state: "CO",
-                                          zip_code: 80503,
-                                          description: "I've got a big backyard!",
-                                          status: "Pending")
-        @pet_1.applications.create!(name: "Aliya",
-                                          street_address: "2525 Broad Street",
-                                          city: "Denver",
-                                          state: "CO",
-                                          zip_code: 80218,
-                                          description: "I love animals!",
-                                          status: "Pending")
         expect(Shelter.with_pending_apps_alpha).to eq([@shelter_1, @shelter_3])
       end
     end
@@ -90,6 +91,16 @@ RSpec.describe Shelter, type: :model do
     describe '#count_adopted' do
       it 'returns the number of pets adopted from a shelter' do
         expect(Shelter.count_adopted(@shelter_1.id)).to eq(0)
+      end
+    end
+
+    describe '#pets_with_pending' do
+      it 'returns the names and application id#s of pets with pending apps at a given shelter' do
+        expect(Shelter.pets_with_pending(@shelter_1.id).length).to eq(2)
+        expect(Shelter.pets_with_pending(@shelter_1.id).first.app_id).to eq(@app_1.id)
+        expect(Shelter.pets_with_pending(@shelter_1.id).first.pet_name).to eq(@pet_1.name)
+        expect(Shelter.pets_with_pending(@shelter_1.id).second.app_id).to eq(@app_2.id)
+        expect(Shelter.pets_with_pending(@shelter_1.id).second.pet_name).to eq(@pet_2.name)
       end
     end
   end
