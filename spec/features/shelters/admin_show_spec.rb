@@ -72,9 +72,9 @@ RSpec.describe 'the admin shelters index' do
 
     it 'links to the admin/application show page(s) to accept or reject the pet' do
       within(".action_required") do
-        expect(page).to have_link("Application 1", href: "/admin/applications/#{@application_1.id}")
-        expect(page).to have_link("Application 1", href: "/admin/applications/#{@application_2.id}")
-        expect(page).to have_link("Application 1", href: "/admin/applications/#{@application_3.id}")
+        expect(page).to have_link("Application #{@application_1.id}", href: "/admin/applications/#{@application_1.id}")
+        expect(page).to have_link("Application #{@application_2.id}", href: "/admin/applications/#{@application_2.id}")
+        expect(page).to have_link("Application #{@application_3.id}", href: "/admin/applications/#{@application_3.id}")
       end
     end
   end

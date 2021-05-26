@@ -35,6 +35,7 @@ class SheltersController < ApplicationController
     @avg_age_adoptable_pets = Shelter.avg_age_adoptables(params[:id])
     @count_adoptable_pets = Shelter.count_adoptables(params[:id])
     @count_pets_adopted = Shelter.count_adopted(params[:id])
+    @pets_with_pending = Shelter.select('pets.name AS pet_name, applications.id AS app_id').joins(pets: :applications).where('applications.status = ? and shelters.id = ?', 'Pending', params[:id])
   end
 
   def new

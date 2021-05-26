@@ -12,3 +12,15 @@
   </ul>
 
 </section>
+
+<section class="action_required">
+  <table>
+    <th>Action Required</th>
+    <% @pets_with_pending.each do |pet_with_pending| %>
+    <tr>
+      <td><%= pet_with_pending.pet_name %></td>
+      <td><%= link_to "Application #{pet_with_pending.app_id}", "/admin/applications/#{pet_with_pending.app_id}" %> </td>
+    </tr>
+    <% end %>
+  </table>
+</section>
