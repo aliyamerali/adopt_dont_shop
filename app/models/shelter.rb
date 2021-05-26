@@ -35,6 +35,10 @@ class Shelter < ApplicationRecord
     Shelter.joins(:pets).where('pets.adoptable = ? and shelters.id = ?', true, shelter_id).count
   end
 
+  def self.count_adopted(shelter_id)
+    Shelter.joins(pets: :applications).where('applications.status = ? and shelters.id = ?', 'Approved', shelter_id).count
+  end
+
   def pet_count
     pets.count
   end
