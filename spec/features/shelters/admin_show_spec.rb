@@ -49,7 +49,7 @@ RSpec.describe 'the admin shelters index' do
       visit "/admin/shelters/#{@shelter.id}"
 
       within(".statistics") do
-        expect(page).to have_content("Count of Pets Adopted from #{shelter_1.name}: 3")
+        expect(page).to have_content("Count of Pets Adopted from #{@shelter.name}: 1")
       end
     end
   end
