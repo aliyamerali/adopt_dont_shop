@@ -32,8 +32,8 @@ class SheltersController < ApplicationController
 
   def admin_show
     @shelter = Shelter.find_by_sql("SELECT name, city FROM shelters WHERE id = #{params[:id]}")
-    @avg_age_adoptable_pets = Shelter.joins(:pets).where('pets.adoptable = ? and shelters.id = ?', true, params[:id]).average(:age).round(2)
-    @count_adoptable_pets = Shelter.joins(:pets).where('pets.adoptable = ? and shelters.id = ?', true, params[:id]).count
+    @avg_age_adoptable_pets = Shelter.avg_age_adoptables(params[:id])
+    @count_adoptable_pets = Shelter.count_adoptables(params[:id])
     @count_adoptable_pets = Shelter.joins(:pets).where('pets.adoptable = ? and shelters.id = ?', true, params[:id]).count
     @pets_adopted = Shelter.joins(pets: :applications).where('applications.status = ? and shelters.id = ?', 'Approved', params[:id]).count
   end
