@@ -1,6 +1,8 @@
 <h2> <%= @shelter[0].name %> </h2>
 
-<p>Address: <%= @shelter[0].city %></p>
+<h4>Address: </h4>
+<p><%= @shelter[0].street_address %> <br>
+   <%= @shelter[0].city %>, <%= @shelter[0].state%> <%= @shelter[0].zip_code %></p>
 
 <section class="statistics">
   <h4>Shelter Statistics</h4>

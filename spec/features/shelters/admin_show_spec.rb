@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'the admin shelters index' do
 
   before :each do
-    @shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+    @shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9, street_address: '123 Colfax Ave', zip_code: 80222, state: "CO")
     @shelter_2 = Shelter.create(name: 'RGV animal shelter', city: 'Harlingen, TX', foster_program: false, rank: 5)
     @pirate = @shelter.pets.create(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: true)
     @clawdia = @shelter.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
@@ -34,9 +34,12 @@ RSpec.describe 'the admin shelters index' do
     visit "/admin/shelters/#{@shelter.id}"
   end
 
-  it 'shows the shelter name and address' do
+  it 'shows the shelters name and full address' do
     expect(page).to have_content(@shelter.name)
+    expect(page).to have_content(@shelter.street_address)
     expect(page).to have_content(@shelter.city)
+    expect(page).to have_content(@shelter.state)
+    expect(page).to have_content(@shelter.zip_code)
   end
 
   describe 'statistics section' do

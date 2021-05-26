@@ -31,7 +31,7 @@ class SheltersController < ApplicationController
   end
 
   def admin_show
-    @shelter = Shelter.find_by_sql("SELECT name, city FROM shelters WHERE id = #{params[:id]}")
+    @shelter = Shelter.find_by_sql("SELECT name, street_address, city, state, zip_code FROM shelters WHERE id = #{params[:id]}")
     @avg_age_adoptable_pets = Shelter.avg_age_adoptables(params[:id])
     @count_adoptable_pets = Shelter.count_adoptables(params[:id])
     @count_pets_adopted = Shelter.count_adopted(params[:id])
