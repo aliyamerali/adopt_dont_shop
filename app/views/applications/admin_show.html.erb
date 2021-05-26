@@ -1,19 +1,17 @@
 <h3>Application #<%= @application.id %> </h3>
-<h4><em>Status: <%= @application.status %> </em></h4>
+<p><em>Status: <%= @application.status %> </em></p>
 
 <table>
-  <th>This Application's Pets:</th>
+  <th><h5>This Application's Pets</h5></th>
   <% @apps_pets.each do |apps_pet| %>
   <tr class=<%=apps_pet.pet.name.gsub(/[!@%&". ]/,'')%>>
-    <td> <%= link_to "#{apps_pet.pet.name}", "/pets/#{apps_pet.pet.id}" %> </td>
+    <td> <%= render partial: "/shared/name_as_link", locals: {resource: apps_pet.pet} %></td>
     <% if apps_pet.status != nil %>
       <td><p>Application <%=apps_pet.status.downcase%> for this pet</p></td>
     <% elsif apps_pet.status == nil  && apps_pet.pet.adoptable %>
-      <td><%= button_to "Approve", "/admin/applications/#{@application.id}", params: {pet: apps_pet.pet.id, status: 'approved'}, method: :patch%></td>
-      <td><%= button_to "Reject", "/admin/applications/#{@application.id}", params: {pet: apps_pet.pet.id, status: 'rejected'}, method: :patch%></td>
+      <%= render partial: "/shared/pet_app_approve_reject", locals: {resource: apps_pet} %>
     <% elsif apps_pet.status == nil  && !apps_pet.pet.adoptable %>
-      <td><p>Approved for adoption with another applicant.</p></td>
-      <td><%= button_to "Reject", "/admin/applications/#{@application.id}", params: {pet: apps_pet.pet.id, status: 'rejected'}, method: :patch%></td>
+      <%= render partial: "/shared/pet_app_reject", locals: {resource: apps_pet} %>
     <% end %>
   </tr>
   <% end %>
