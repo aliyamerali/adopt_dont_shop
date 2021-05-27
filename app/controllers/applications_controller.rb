@@ -49,7 +49,6 @@ class ApplicationsController < ApplicationController
     elsif @apps_pets.where("status = ? or status = ?",'approved','rejected').count == @apps_pets.count
       @application.update(status: "Rejected")
     end
-
   end
 
   def admin_index
@@ -57,7 +56,7 @@ class ApplicationsController < ApplicationController
   end
 
   def admin_update
-    @join_record = ApplicationsPet.where(pet_id: params[:pet], application_id: params[:id])
+    @join_record = ApplicationsPet.record_lookup(params[:pet], params[:id])
     @join_record.update(status: params[:status])
 
     redirect_to "/admin/applications/#{params[:id]}"
