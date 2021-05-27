@@ -1,7 +1,7 @@
-<h2>All Shelters</h2>
+<h3>All Shelters</h3>
 
 <% @shelters.each do |shelter| %>
-  <h5><%= link_to shelter.name, "/admin/shelters/#{shelter.id}"%></h5>
+  <h4><%= link_to shelter.name, "/admin/shelters/#{shelter.id}"%></h4>
   <ul>
     <li>City: <%= shelter.city %></li>
     <li>Foster Program? <%= shelter.foster_program %> </li>
@@ -9,7 +9,7 @@
   </ul>
 <% end %>
 
-<h2>Shelters with Pending Applications</h2>
+<h3>Shelters with Pending Applications</h3>
 <ul class="shelters-with-pending">
 <% @shelters_with_pending.each do |shelter| %>
     <li> <%= shelter.name %> </li>

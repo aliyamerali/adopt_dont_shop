@@ -12,36 +12,51 @@ RSpec.describe 'application' do
   it 'displays a link to all shelters' do
     visit '/'
 
-    expect(page).to have_link("Shelters")
-    click_link("Shelters")
-    expect(page).to have_current_path('/shelters')
-    expect(page).to have_link("Shelters")
-    expect(page).to have_link("Pets")
-    expect(page).to have_link("Veterinarians")
-    expect(page).to have_link("Veterinary Offices")
+    within(".mainbar") do
+      expect(page).to have_link("Shelters")
+      click_link("Shelters")
+      expect(page).to have_current_path('/shelters')
+      expect(page).to have_link("Shelters")
+      expect(page).to have_link("Pets")
+    end
+
+    within("div#vet.dropdown") do
+      expect(page).to have_link("Veterinarians")
+      expect(page).to have_link("Veterinary Offices")
+    end
   end
 
   it 'displays a link to all veterinary offices' do
     visit '/'
 
-    expect(page).to have_link("Veterinary Offices")
-    click_link("Veterinary Offices")
-    expect(page).to have_current_path('/veterinary_offices')
-    expect(page).to have_link("Shelters")
-    expect(page).to have_link("Pets")
-    expect(page).to have_link("Veterinarians")
-    expect(page).to have_link("Veterinary Offices")
+    within("div#vet.dropdown") do
+      expect(page).to have_link("Veterinary Offices")
+      click_link("Veterinary Offices")
+      expect(page).to have_current_path('/veterinary_offices')
+      expect(page).to have_link("Veterinarians")
+      expect(page).to have_link("Veterinary Offices")
+    end
+
+    within(".mainbar") do
+      expect(page).to have_link("Shelters")
+      expect(page).to have_link("Pets")
+    end
   end
 
   it 'displays a link to all veterinarians' do
     visit '/'
 
-    expect(page).to have_link("Veterinarians")
-    click_link("Veterinarians")
-    expect(page).to have_current_path('/veterinarians')
-    expect(page).to have_link("Shelters")
-    expect(page).to have_link("Pets")
-    expect(page).to have_link("Veterinarians")
-    expect(page).to have_link("Veterinary Offices")
+    within("div#vet.dropdown") do
+      expect(page).to have_link("Veterinarians")
+      click_link("Veterinarians")
+      expect(page).to have_current_path('/veterinarians')
+      expect(page).to have_link("Veterinarians")
+      expect(page).to have_link("Veterinary Offices")
+    end
+
+    within(".mainbar") do
+      expect(page).to have_link("Shelters")
+      expect(page).to have_link("Pets")
+    end
   end
 end

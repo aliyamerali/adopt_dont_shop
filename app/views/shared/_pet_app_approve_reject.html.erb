@@ -1,0 +1,2 @@
+<td><%= button_to "Approve", "/admin/applications/#{@application.id}", params: {pet: resource.pet.id, status: 'approved'}, method: :patch%></td>
+<td><%= button_to "Reject", "/admin/applications/#{@application.id}", params: {pet: resource.pet.id, status: 'rejected'}, method: :patch%></td>

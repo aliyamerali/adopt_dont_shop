@@ -1,0 +1,2 @@
+<td><p>Approved for adoption with another applicant.</p></td>
+<td><%= button_to "Reject", "/admin/applications/#{@application.id}", params: {pet: resource.pet.id, status: 'rejected'}, method: :patch%></td>

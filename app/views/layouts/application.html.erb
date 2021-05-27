@@ -10,17 +10,35 @@
   </head>
 
   <body>
+    <section class="navbar">
+      <div class="mainbar">
+      <%= link_to "Pets", "/pets"%>
+      <%= link_to "Shelters", "/shelters"%>
+      <%= link_to "New Application", "/applications/new" %>
+      </div>
+      <div class="dropdown" id="vet">
+          <button class="dropbtn">Vets</button>
+          <div class="dropdown-content">
+            <%= link_to "Veterinarians", "/veterinarians" %>
+            <%= link_to "Veterinary Offices", "/veterinary_offices" %>
+          </div>
+      </div>
+      <div class="dropdown" id="admin">
+          <button class="dropbtn">Admin</button>
+          <div class="dropdown-content">
+            <%= link_to "Shelters", "/admin/shelters" %>
+            <%= link_to "Applications", "/admin/applications" %>
+          </div>
+      </div>
+    </section>
+
     <% flash.each do |type, msg| %>
-      <div>
+      <br>
+      <div class=<%=type%> >
         <%= msg %>
       </div>
     <% end %>
-    <section>
-      <p><%= link_to "Pets", "/pets" %></p>
-      <p><%= link_to "Shelters", "/shelters" %></p>
-      <p><%= link_to "Veterinarians", "/veterinarians" %></p>
-      <p><%= link_to "Veterinary Offices", "/veterinary_offices" %></p>
-    </section>
+
     <%= yield %>
   </body>
 </html>

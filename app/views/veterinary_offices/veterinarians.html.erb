@@ -1,10 +1,10 @@
-<h1>All veterinarians</h1>
+<h3>All veterinarians</h3>
 
 <%= link_to "Sort alphabetically", "/veterinary_offices/#{@veterinary_office.id}/veterinarians?sort=alphabetical" %>
 
 <% @office_vets.each do |vet| %>
   <section id="veterinarian-<%= vet.id %>">
-    <h3><%= vet.name %></h3>
+    <h4><%= vet.name %></h4>
     <p>Rating: <%= vet.review_rating %></p>
     <p>Practice: <%= vet.office_name %></p>
     <%= link_to "Edit #{vet.name}", "/veterinarians/#{vet.id}/edit" %>
