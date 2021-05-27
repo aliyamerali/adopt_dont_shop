@@ -39,7 +39,7 @@ class ApplicationsController < ApplicationController
 
   def admin_show
     @application = Application.find(params[:id])
-    @apps_pets = ApplicationsPet.joins(:pet).where(application_id: @application.id)
+    @apps_pets = ApplicationsPet.apps_pets(@application.id)
 
     if @apps_pets.where("status = ?" , 'approved').count == @apps_pets.count
       @application.update(status: "Approved")
