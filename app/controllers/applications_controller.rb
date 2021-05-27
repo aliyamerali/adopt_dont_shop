@@ -52,6 +52,10 @@ class ApplicationsController < ApplicationController
 
   end
 
+  def admin_index
+    @applications = Application.all.order(:id)
+  end
+
   def admin_update
     @join_record = ApplicationsPet.where(pet_id: params[:pet], application_id: params[:id])
     @join_record.update(status: params[:status])
