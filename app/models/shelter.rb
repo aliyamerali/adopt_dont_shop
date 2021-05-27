@@ -24,23 +24,35 @@ class Shelter < ApplicationRecord
   end
 
   def self.with_pending_apps_alpha
-    joins(pets: :applications).where('applications.status'=> "Pending").distinct.order(:name)
+    joins(pets: :applications)
+    .where('applications.status'=> "Pending")
+    .distinct
+    .order(:name)
   end
 
   def self.avg_age_adoptables(shelter_id)
-    joins(:pets).where('pets.adoptable = ? and shelters.id = ?', true, shelter_id).average(:age).round(2)
+    joins(:pets)
+    .where('pets.adoptable = ? and shelters.id = ?', true, shelter_id)
+    .average(:age)
+    .round(2)
   end
 
   def self.count_adoptables(shelter_id)
-    Shelter.joins(:pets).where('pets.adoptable = ? and shelters.id = ?', true, shelter_id).count
+    joins(:pets)
+    .where('pets.adoptable = ? and shelters.id = ?', true, shelter_id)
+    .count
   end
 
   def self.count_adopted(shelter_id)
-    Shelter.joins(pets: :applications).where('applications.status = ? and shelters.id = ?', 'Approved', shelter_id).count
+    joins(pets: :applications)
+    .where('applications.status = ? and shelters.id = ?', 'Approved', shelter_id)
+    .count
   end
 
   def self.pets_with_pending(shelter_id)
-    Shelter.select('pets.name AS pet_name, applications.id AS app_id').joins(pets: :applications).where('applications.status = ? and shelters.id = ?', 'Pending', shelter_id)
+    select('pets.name AS pet_name, applications.id AS app_id')
+    .joins(pets: :applications)
+    .where('applications.status = ? and shelters.id = ?', 'Pending', shelter_id)
   end
 
   def pet_count

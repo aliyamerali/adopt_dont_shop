@@ -17,7 +17,12 @@ class ApplicationsController < ApplicationController
 
     if params[:adopt]
       pet = Pet.find(params[:adopt])
-      @application.add_pet(pet)
+      if @application.pets.exists?(pet.id)
+        flash[:alert] = "Error: #{pet.name} already added to this application"
+        redirect_to "/applications/#{params[:id]}"
+      else
+        @application.add_pet(pet)
+      end
     end
 
     @pets = @application.pets
@@ -39,7 +44,7 @@ class ApplicationsController < ApplicationController
 
   def admin_show
     @application = Application.find(params[:id])
-    @apps_pets = ApplicationsPet.joins(:pet).where(application_id: @application.id)
+    @apps_pets = ApplicationsPet.apps_pets(@application.id)
 
     if @apps_pets.where("status = ?" , 'approved').count == @apps_pets.count
       @application.update(status: "Approved")
@@ -49,11 +54,14 @@ class ApplicationsController < ApplicationController
     elsif @apps_pets.where("status = ? or status = ?",'approved','rejected').count == @apps_pets.count
       @application.update(status: "Rejected")
     end
+  end
 
+  def admin_index
+    @applications = Application.all.order(:id)
   end
 
   def admin_update
-    @join_record = ApplicationsPet.where(pet_id: params[:pet], application_id: params[:id])
+    @join_record = ApplicationsPet.record_lookup(params[:pet], params[:id])
     @join_record.update(status: params[:status])
 
     redirect_to "/admin/applications/#{params[:id]}"

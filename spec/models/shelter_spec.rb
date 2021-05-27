@@ -46,55 +46,55 @@ RSpec.describe Shelter, type: :model do
   end
 
   describe 'class methods' do
-    describe '#search' do
+    describe '::search' do
       it 'returns partial matches' do
         expect(Shelter.search("Fancy")).to eq([@shelter_3])
       end
     end
 
-    describe '#order_by_recently_created' do
+    describe '::order_by_recently_created' do
       it 'returns shelters with the most recently created first' do
         expect(Shelter.order_by_recently_created).to eq([@shelter_3, @shelter_2, @shelter_1])
       end
     end
 
-    describe '#order_by_number_of_pets' do
+    describe '::order_by_number_of_pets' do
       it 'orders the shelters by number of pets they have, descending' do
         expect(Shelter.order_by_number_of_pets).to eq([@shelter_1, @shelter_3, @shelter_2])
       end
     end
 
-    describe '#reverse_order_by_name' do
+    describe '::reverse_order_by_name' do
       it 'orders shelters by name in reverse alphabetical order' do
         expect(Shelter.reverse_order_by_name).to eq([@shelter_2, @shelter_3, @shelter_1])
       end
     end
 
-    describe '#with_pending_apps_alpha' do
+    describe '::with_pending_apps_alpha' do
       it 'returns distinct shelters with pending applications sorted alphabetically' do
         expect(Shelter.with_pending_apps_alpha).to eq([@shelter_1, @shelter_3])
       end
     end
 
-    describe '#avg_age_adoptables' do
+    describe '::avg_age_adoptables' do
       it 'returns the average age of pets that are adoptable at a given shelter' do
         expect(Shelter.avg_age_adoptables(@shelter_1.id)).to eq(4)
       end
     end
 
-    describe '#count_adoptables' do
+    describe '::count_adoptables' do
       it 'returns the total count of pets that are adoptable at a given shelter' do
         expect(Shelter.count_adoptables(@shelter_1.id)).to eq(2)
       end
     end
 
-    describe '#count_adopted' do
+    describe '::count_adopted' do
       it 'returns the number of pets adopted from a shelter' do
         expect(Shelter.count_adopted(@shelter_1.id)).to eq(0)
       end
     end
 
-    describe '#pets_with_pending' do
+    describe '::pets_with_pending' do
       it 'returns the names and application id#s of pets with pending apps at a given shelter' do
         expect(Shelter.pets_with_pending(@shelter_1.id).length).to eq(2)
         expect(Shelter.pets_with_pending(@shelter_1.id).first.app_id).to eq(@app_1.id)
@@ -106,25 +106,25 @@ RSpec.describe Shelter, type: :model do
   end
 
   describe 'instance methods' do
-    describe '.adoptable_pets' do
+    describe '#adoptable_pets' do
       it 'only returns pets that are adoptable' do
         expect(@shelter_1.adoptable_pets).to eq([@pet_2, @pet_4])
       end
     end
 
-    describe '.alphabetical_pets' do
+    describe '#alphabetical_pets' do
       it 'returns pets associated with the given shelter in alphabetical name order' do
         expect(@shelter_1.alphabetical_pets).to eq([@pet_4, @pet_2])
       end
     end
 
-    describe '.shelter_pets_filtered_by_age' do
+    describe '#shelter_pets_filtered_by_age' do
       it 'filters the shelter pets based on given params' do
         expect(@shelter_1.shelter_pets_filtered_by_age(5)).to eq([@pet_4])
       end
     end
 
-    describe '.pet_count' do
+    describe '#pet_count' do
       it 'returns the number of pets at the given shelter' do
         expect(@shelter_1.pet_count).to eq(3)
       end

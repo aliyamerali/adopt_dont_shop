@@ -1,0 +1,21 @@
+<h3>All Applications</h3>
+
+<table>
+  <th>All Applications</th>
+  <tr>
+    <td>ID </td>
+    <td>Applicant Name </td>
+    <td>City </td>
+    <td>State </td>
+    <td>Application Status </td>
+  </tr>
+  <% @applications.each do |application| %>
+    <tr>
+      <td> <%= link_to application.id , "/admin/applications/#{application.id}" %> </td>
+      <td><%= application.name %></td>
+      <td><%= application.city %></td>
+      <td><%= application.state %></td>
+      <td><%= application.status %></td>
+    </tr>
+  <% end %>
+</table>

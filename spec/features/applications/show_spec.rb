@@ -95,6 +95,18 @@ RSpec.describe "Application show page", type: :feature do
     expect(page).to have_link(@alfalfa.name, href: "/pets/#{@alfalfa.id}")
   end
 
+  it 'will raise an alert if user tried to to add the same pet twice' do
+    visit "/applications/#{@application2.id}"
+    fill_in :search, with: "Alfalfa"
+    click_on "Search"
+    click_on "Adopt this Pet"
+
+    fill_in :search, with: "Alfalfa"
+    click_on "Search"
+    click_on "Adopt this Pet"
+    expect(page).to have_content("Error: Alfalfa already added to this application")
+  end
+
   it 'has the ability to submit an application if it is In Progress status and has at least one pet added' do
     visit "/applications/#{@application2.id}"
     expect(page).to_not have_button("Submit Application")
