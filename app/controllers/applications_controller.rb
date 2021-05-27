@@ -2,15 +2,6 @@ class ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
-    if params[:commit] == "Submit Application"
-      if @application.update(status: "Pending", description: params[:description])
-        @application.save
-      else
-        flash[:alert] = "Error: #{error_message(@application.errors)}"
-        redirect_to "/applications/#{params[:id]}"
-      end
-    end
-
     if params[:search]
       @pets_search = Pet.search(params[:search])
     end
@@ -26,6 +17,16 @@ class ApplicationsController < ApplicationController
     end
 
     @pets = @application.pets
+  end
+
+  def update
+    @application = Application.find(params[:id])
+    if @application.update(status: "Pending", description: params[:description])
+      @application.save
+    else
+      flash[:alert] = "Error: #{error_message(@application.errors)}"
+    end
+    redirect_to "/applications/#{params[:id]}"
   end
 
   def new
