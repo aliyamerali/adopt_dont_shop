@@ -2,8 +2,8 @@ class ApplicationsPet < ApplicationRecord
   belongs_to :application
   belongs_to :pet
 
-  scope :approved, -> {where("status = ?", "Approved")}
-  scope :approved_or_rejected, -> {where("status = ? or status = ?", "Approved", "Rejected")}
+  scope :approved, -> {where("status = ?", "approved")}
+  scope :approved_or_rejected, -> {where("status = ? or status = ?", "approved", "rejected")}
 
   def self.apps_pets(app_id)
     joins(:pet).where(application_id: app_id)

@@ -19,8 +19,8 @@ RSpec.describe ApplicationsPet, type: :model do
       description: "I love animals!",
       status: "Pending")
 
-    @app_record = ApplicationsPet.create!(application_id: @application.id, pet_id: @pet.id, status: "Approved")
-    ApplicationsPet.create!(application_id: @application.id, pet_id: @pet2.id, status: "Rejected")
+    @app_record = ApplicationsPet.create!(application_id: @application.id, pet_id: @pet.id, status: "approved")
+    ApplicationsPet.create!(application_id: @application.id, pet_id: @pet2.id, status: "rejected")
   end
 
   describe 'scopes' do
