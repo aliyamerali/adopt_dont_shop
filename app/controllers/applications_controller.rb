@@ -4,9 +4,7 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     if params[:search]
       @pets_search = Pet.search(params[:search])
-    end
-
-    if params[:adopt]
+    elsif params[:adopt]
       pet = Pet.find(params[:adopt])
       if @application.pets.exists?(pet.id)
         flash[:alert] = "Error: #{pet.name} already added to this application"
