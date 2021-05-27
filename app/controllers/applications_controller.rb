@@ -46,12 +46,12 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     @apps_pets = ApplicationsPet.apps_pets(@application.id)
 
-    if @apps_pets.where("status = ?" , 'approved').count == @apps_pets.count
+    if @apps_pets.approved.count == @apps_pets.count
       @application.update(status: "Approved")
       @apps_pets.each do |apps_pet|
         apps_pet.pet.update(adoptable: false)
       end
-    elsif @apps_pets.where("status = ? or status = ?",'approved','rejected').count == @apps_pets.count
+    elsif @apps_pets.approved_or_rejected.count == @apps_pets.count
       @application.update(status: "Rejected")
     end
   end
