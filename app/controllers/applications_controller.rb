@@ -17,7 +17,12 @@ class ApplicationsController < ApplicationController
 
     if params[:adopt]
       pet = Pet.find(params[:adopt])
-      @application.add_pet(pet)
+      if @application.pets.exists?(pet.id)
+        flash[:alert] = "Error: #{pet.name} already added to this application"
+        redirect_to "/applications/#{params[:id]}"
+      else
+        @application.add_pet(pet)
+      end
     end
 
     @pets = @application.pets
