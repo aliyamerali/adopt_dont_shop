@@ -128,7 +128,7 @@ RSpec.describe "Application show page", type: :feature do
     expect(page).to_not have_content("Add a Pet to this Application")
   end
 
-  it 'throws an error if no description submitted' do
+  it 'raises an alert if no description submitted' do
     visit "/applications/#{@application2.id}"
     expect(page).to_not have_button("Submit Application")
     expect(page).to have_content("Status: In Progress")
