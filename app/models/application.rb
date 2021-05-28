@@ -13,4 +13,8 @@ class Application < ApplicationRecord
     pets << pet
   end
 
+  def submittable?
+    status == "In Progress" && pets.length != 0
+  end
+
 end

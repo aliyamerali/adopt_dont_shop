@@ -2,30 +2,26 @@ class ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
-    if params[:commit] == "Submit Application"
-      if @application.update(status: "Pending", description: params[:description])
-        @application.save
-      else
-        flash[:alert] = "Error: #{error_message(@application.errors)}"
-        redirect_to "/applications/#{params[:id]}"
-      end
-    end
 
     if params[:search]
       @pets_search = Pet.search(params[:search])
-    end
-
-    if params[:adopt]
-      pet = Pet.find(params[:adopt])
-      if @application.pets.exists?(pet.id)
-        flash[:alert] = "Error: #{pet.name} already added to this application"
-        redirect_to "/applications/#{params[:id]}"
-      else
-        @application.add_pet(pet)
-      end
+    elsif params[:adopt]
+      adopt(params[:adopt])
     end
 
     @pets = @application.pets
+  end
+
+  def update
+    @application = Application.find(params[:id])
+
+    if @application.update(status: "Pending", description: params[:description])
+      @application.save
+    else
+      flash[:alert] = "Error: #{error_message(@application.errors)}"
+    end
+    
+    redirect_to "/applications/#{params[:id]}"
   end
 
   def new
@@ -70,5 +66,15 @@ class ApplicationsController < ApplicationController
   private
   def application_params
     params.permit(:name, :street_address, :city, :state, :zip_code, :description, :status)
+  end
+
+  def adopt(pet_id)
+    pet = Pet.find(pet_id)
+    if @application.pets.exists?(pet.id)
+      flash[:alert] = "Error: #{pet.name} already added to this application"
+      redirect_to "/applications/#{@application.id}"
+    else
+      @application.add_pet(pet)
+    end
   end
 end
