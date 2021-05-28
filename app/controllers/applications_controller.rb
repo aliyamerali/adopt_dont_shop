@@ -12,14 +12,15 @@ class ApplicationsController < ApplicationController
     @pets = @application.pets
   end
 
-
   def update
     @application = Application.find(params[:id])
+
     if @application.update(status: "Pending", description: params[:description])
       @application.save
     else
       flash[:alert] = "Error: #{error_message(@application.errors)}"
     end
+    
     redirect_to "/applications/#{params[:id]}"
   end
 
@@ -66,7 +67,7 @@ class ApplicationsController < ApplicationController
   def application_params
     params.permit(:name, :street_address, :city, :state, :zip_code, :description, :status)
   end
-  
+
   def adopt(pet_id)
     pet = Pet.find(pet_id)
     if @application.pets.exists?(pet.id)
