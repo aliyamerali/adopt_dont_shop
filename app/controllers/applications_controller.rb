@@ -2,20 +2,16 @@ class ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
+
     if params[:search]
       @pets_search = Pet.search(params[:search])
     elsif params[:adopt]
-      pet = Pet.find(params[:adopt])
-      if @application.pets.exists?(pet.id)
-        flash[:alert] = "Error: #{pet.name} already added to this application"
-        redirect_to "/applications/#{params[:id]}"
-      else
-        @application.add_pet(pet)
-      end
+      adopt(params[:adopt])
     end
 
     @pets = @application.pets
   end
+
 
   def update
     @application = Application.find(params[:id])
@@ -69,5 +65,15 @@ class ApplicationsController < ApplicationController
   private
   def application_params
     params.permit(:name, :street_address, :city, :state, :zip_code, :description, :status)
+  end
+  
+  def adopt(pet_id)
+    pet = Pet.find(pet_id)
+    if @application.pets.exists?(pet.id)
+      flash[:alert] = "Error: #{pet.name} already added to this application"
+      redirect_to "/applications/#{@application.id}"
+    else
+      @application.add_pet(pet)
+    end
   end
 end
