@@ -1,7 +1,7 @@
 # Adopt, don't Shop
 
 ## About this Project
-"Adopt, Don't Shop" is a fictitious pet-adoption platform implementing CRUD functionality for a many to many relationship and ActiveRecord for database queries. Users are be able to apply to adopt pets, and Admins are be able to approve or reject applications and see statistics for the Shelters, Pets, and Applications in the system.  
+"Adopt, Don't Shop" is a fictitious pet-adoption platform implementing CRUD functionality for a many to many relationship and ActiveRecord for database queries. Users are able to apply to adopt pets, and Admins are be able to approve or reject applications and see statistics for the Shelters, Pets, and Applications in the system.  
 
 This project demonstrates MVC principles in code organization, leverages validation in models, and partials in views. 
 
