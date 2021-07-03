@@ -1,47 +1,18 @@
 # Adopt, don't Shop
 
-### Updated database design with Applications
+## About this Project
+"Adopt, Don't Shop" is a fictitious pet-adoption platform implementing CRUD functionality for a many to many relationship and ActiveRecord for database queries. Users are be able to apply to adopt pets, and Admins are be able to approve or reject applications and see statistics for the Shelters, Pets, and Applications in the system.  
+
+This project demonstrates MVC principles in code organization, leverages validation in models, and partials in views. 
+
+Timeframe: 7 days   
+Heroku: [Adopt, Don't Shop](https://powerful-cliffs-43765.herokuapp.com/)  
+Contributor: 
+- Aliya Merali  
+   [Github](https://github.com/aliyamerali) | [LinkedIn](https://www.linkedin.com/in/aliyamerali/)
+
+### Schema
 ![Adopt Don't Shop Schema - ERD with colored entities (UML notation)](https://user-images.githubusercontent.com/5446926/119418545-756b4980-bcb5-11eb-91ce-c275867eac99.jpeg)
-
-### Existing database design
-![visual-schema.png](https://i.postimg.cc/0ywZgQ1W/visual-schema.png)
-
-## Learning Goals
-
-In this project, students will build upon the code in this repo to create a Pet Adoption Platform. Users will be able to apply to adopt pets, and Admins will be able to approve or reject applications and see statistics for the Shelters, Pets, and Applications in the system.
-
-* Build out CRUD functionality for a many to many relationship
-* Use ActiveRecord to write queries that join multiple tables of data together
-* Use MVC to organize code effectively, limiting the amount of logic included in views and controllers
-* Validate models and handle sad paths for invalid data input
-* Use flash messages to give feedback to the user
-* Use partials in views
-* Use `within` blocks in tests
-* Track user stories using GitHub Projects
-* Deploy an application to Heroku
-
-## Check In
-
-During your Check In, you should be prepared to review your database schema for the many to many relationship, your deployment to Heroku, and your GitHub Projects board.
-
-## Rubric
-
-| | **Feature Completeness** | **Rails** | **ActiveRecord** | **Testing and Debugging** | **Project Management** |
-| --- | --- | --- | --- | --- | --- |
-| **4: Exceptional**  | All User Stories 100% complete including all sad paths and edge cases, and some extension work completed | Students implement strategies not discussed in class and can defend their design decisions | At least one ActiveRecord extension is complete | 100% coverage for features and models. A gem that enhances testing effectiveness is implemented (orderly, factorybot, faker, etc). Students can point to multiple examples of edge case testing that are not included in the user stories | GitHub Project board is fully up to date in all checkins and the evaluation. Students create custom cards on the project board to track tasks in addition to user stories.
-| **3: Passing** | All stories in the "Deploy", "Apply for Pet(s)", "Database Logic Part 1", and "Approving Applications" sections are completed | Students use the principles of MVC to effectively organize code with only 1 - 2 infractions. Action View helpers are used to create forms, links, and buttons. Routes and Actions mostly follow RESTful conventions, and student can defend any non restful routes. At least one partial is created and included in at least two different views. Models include validations. Flash messages are used. | ActiveRecord helpers are utilized whenever possible. ActiveRecord is used in a clear and effective way to read/write data. No Ruby is used to process data. All queries functional and accurately implemented. | 100% coverage for models. 98% coverage for features. Tests are well written and meaningful. Tests utilize within blocks to target specific areas of a page | Student uses GitHub Project to track all user stories. Project board is mostly up to date in all checkins. Project board is fully up to date at the evaluation |
-| **2: Below Expectations** | Students complete all but 1 - 3 User Stories |  Students use the principles of MVC to effectively organize code, but may have more than 2 infractions. Some routes and actions are not restful, and student cannot defend those decisions. Project may fail to include one of the following: a partial that is included in at least two different views, model validations, or use of flash messages. | Ruby is used to process data that could use ActiveRecord instead. Some instances where ActiveRecord helpers are not utilized. Some queries not accurately implemented. | Feature test coverage between 90% and 98%, or model test coverage below 100%, or tests are not meaningfully written or have an unclear objective, or tests do not utilize within blocks | GitHub Project board is not utilized during one of the checkins. Project board is not fully up to date during evaluation.
-| **1: Failing** | Students fail to complete 4 or more User Stories | Project fails to include two out of the following: a partial that is included in at least two different views, model validations, or use of flash messages | Ruby is used to process data more often than ActiveRecord. Many cases where ActiveRecord helpers are not utilized. | Below 90% coverage for either features or models. | GitHub projects is not utilized
-
-## Evaluation
-
-Before your evaluation, choose 2 user stories to present in a small group. Try to pick user stories that you think will deliever the highest value in terms of feedback from the instructor and peers.
-
-During the evaluation, you will present your user story:
-
-* Demonstrate the user story on Heroku (or localhost if the feature is not functional in Production)
-* Show the test(s) for the user story
-* Show all code that implements the user story
 
 # User Stories
 
@@ -66,7 +37,7 @@ Use these guides: https://devcenter.heroku.com/articles/getting-started-with-rai
 Visitors to the site will be able to create applications to adopt pets. An application has many pets. Pets can have many applications.
 
 ```
-[ ] done
+[x] done
 
 Application Show Page
 
@@ -81,7 +52,7 @@ Then I can see the following:
 ```
 
 ```
-[ ] done
+[x] done
 
 Starting an Application
 
@@ -103,7 +74,7 @@ And I see an indicator that this application is "In Progress"
 ```
 
 ```
-[ ] done
+[x] done
 
 Starting an Application, Form not Completed
 
@@ -116,7 +87,7 @@ And I see a message that I must fill in those fields.
 ```
 
 ```
-[ ] done
+[x] done
 
 Searching for Pets for an Application
 
@@ -132,7 +103,7 @@ And under the search bar I see any Pet whose name matches my search
 ```
 
 ```
-[ ] done
+[x] done
 
 Add a Pet to an Application
 
@@ -147,7 +118,7 @@ And I see the Pet I want to adopt listed on this application
 ```
 
 ```
-[ ] done
+[x] done
 
 Submit an Application
 
@@ -165,7 +136,7 @@ And I do not see a section to add more pets to this application
 ```
 
 ```
-[ ] done
+[x] done
 
 No Pets on an Application
 
@@ -180,7 +151,7 @@ Then I do not see a section to submit my application
 These stories emphasize key database concepts
 
 ```
-[ ] done
+[x] done
 
 Partial Matches for Pet Names
 
@@ -192,7 +163,7 @@ For example, if I search for "fluff", my search would match pets with names "flu
 ```
 
 ```
-[ ] done
+[x] done
 
 Case Insensitive Matches for Pet Names
 
@@ -205,6 +176,7 @@ For example, if I search for "fluff", my search would match pets with names "Flu
 
 ```
 SQL Only Story
+[x] done
 
 For this story, you should write your queries in raw sql. You can use the ActiveRecord find_by_sql method to execute raw sql queries: https://guides.rubyonrails.org/active_record_querying.html#finding-by-sql
 
@@ -216,6 +188,8 @@ Then I see all Shelters in the system listed in reverse alphabetical order by na
 ```
 
 ```
+[x] done
+
 For this story, you should fully leverage ActiveRecord methods in your query.
 
 Shelters with Pending Applications
@@ -233,7 +207,7 @@ Pets on an application can either be accepted or rejected.
 For this set of stories, we will be making routes that begin with '/admin'. This is to indicate that only a user with special privileges should be able to accept or reject pets on an application. Normally, we would want to make sure that a user is logged into an admin account before being able complete any of this workflow, but we will not add any log in or authorization functionality to this project.
 
 ```
-[ ] done
+[x] done
 
 Approving a Pet for Adoption
 
@@ -247,7 +221,7 @@ And instead I see an indicator next to the pet that they have been approved
 ```
 
 ```
-[ ] done
+[x] done
 
 Rejecting a Pet for Adoption
 
@@ -261,6 +235,7 @@ And instead I see an indicator next to the pet that they have been rejected
 ```
 
 ```
+[x] done
 Approved/Rejected Pets on one Application do not affect other Applications
 
 As a visitor
@@ -277,7 +252,7 @@ And instead I see buttons to approve or reject the pet for this specific applica
 Once all pets on an application have been marked either accepted or rejected, then the application is no longer "Pending". If all the pets were accepted, then the application is "Accepted". If one or more pets on the application is rejected, then the entire application is "Rejected".
 
 ```
-[ ] done
+[x] done
 
 All Pets Accepted on an Application
 
@@ -289,7 +264,7 @@ And I see the application's status has changed to "Approved"
 ```
 
 ```
-[ ] done
+[x] done
 
 One or More Pets Rejected on an Application
 
@@ -302,6 +277,7 @@ And I see the application's status has changed to "Rejected"
 ```
 
 ```
+[x] done
 Application Approval makes Pets not adoptable
 
 As a visitor
@@ -314,7 +290,7 @@ Then I see that those pets are no longer "adoptable"
 ```
 Pets can only have one approved application on them at any time
 
-[ ] done
+[x] done
 
 As a visitor
 When a pet has an "Approved" application on them
@@ -330,6 +306,7 @@ And I do see a button to reject them
 These stories emphasize SQL and ActiveRecord concepts.
 
 ```
+[x] done
 SQL Only Story
 
 For this story, you should write your queries in raw sql. You can use the ActiveRecord find_by_sql method to execute raw sql queries: https://guides.rubyonrails.org/active_record_querying.html#finding-by-sql
@@ -348,6 +325,7 @@ NOTE: Your query should only return the necessary data to complete the story
 For the following stories, you should fully leverage ActiveRecord methods in your queries.
 
 ```
+[x] done
 Shelters with Pending Applications Listed Alphabetically
 
 As a visitor
@@ -358,6 +336,7 @@ Then I see all those shelters are listed alphabetically
 
 ```
 Admin Shelters Show Page Links
+[x] done
 
 As a visitor
 When I visit the admin shelter index ('/admin/shelters')
@@ -368,6 +347,7 @@ Then I am taken to that shelter's admin show page
 
 ```
 Average Pet Age
+[x] done
 
 As a visitor
 When I visit an admin shelter show page
@@ -377,6 +357,7 @@ And in that section I see the average age of all adoptable pets for that shelter
 
 ```
 Count of Adoptable Pets
+[x] done
 
 As a visitor
 When I visit an admin shelter show page
@@ -386,6 +367,7 @@ And in that section I see the number of pets at that shelter that are adoptable
 
 ```
 Count of Pets that have been Adopted
+[x] done
 
 As a visitor
 When I visit an admin shelter show page
@@ -397,6 +379,7 @@ Note: A Pet has been adopted from a shelter if they are part of an approved appl
 
 ```
 Action Required
+[x] done
 
 As a visitor
 When I visit an admin shelter show page
@@ -406,20 +389,10 @@ In that section, I see a list of all pets for this shelter that have a pending a
 
 ```
 Action Required Links to Application Show Page
+[x] done
 
 As a visitor
 When I visit an admin shelter show page
 And I look in the "Action Required" section
 Then next to each pet's name I see a link to the admin application show page where I can accept or reject the pet.
 ```
-
-## Extensions
-
-### ActiveRecord Extensions
-
-1. Refactor your code to make use of [ActiveRecord callbacks](https://guides.rubyonrails.org/active_record_callbacks.html)
-1. Refactor your code to make use of [ActiveRecord Scopes](https://guides.rubyonrails.org/active_record_querying.html#scopes)
-
-### Styling
-
-Implement a CSS Grid Framework to improve your styling, either [CSS Grid Layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) or [Bootstrap](https://getbootstrap.com/)
